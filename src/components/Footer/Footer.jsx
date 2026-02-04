@@ -1,65 +1,68 @@
-import { Twitter, Github, Linkedin } from 'lucide-react'
+import { motion } from 'framer-motion'
 import './Footer.css'
+
+const footerLinks = {
+  Product: ['Features', 'Pricing', 'Changelog', 'Roadmap'],
+  Resources: ['Documentation', 'Tutorials', 'Blog', 'Support'],
+  Company: ['About', 'Careers', 'Contact', 'Legal'],
+  Connect: ['Twitter', 'Discord', 'GitHub', 'LinkedIn']
+}
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer__grid">
-          <div className="footer__brand">
-            <a href="/" className="footer__logo">
-              <svg viewBox="0 0 32 32" fill="none" className="footer__logo-icon">
-                <rect width="32" height="32" rx="8" fill="#7C3AED"/>
-                <path d="M16 6L24 24H8L16 6Z" fill="white"/>
-                <circle cx="16" cy="20" r="2" fill="#7C3AED"/>
-              </svg>
-              <span>Axiom</span>
-            </a>
+        <div className="footer__top">
+          <motion.div 
+            className="footer__brand"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <img src="/logo.avif" alt="Axiom" className="footer__logo" />
             <p className="footer__tagline">
-              Testing for teams that ship fast.
+              The testing platform for teams that ship fast.
             </p>
-            <div className="footer__social">
-              <a href="#twitter" aria-label="Twitter"><Twitter size={18} /></a>
-              <a href="#github" aria-label="GitHub"><Github size={18} /></a>
-              <a href="#linkedin" aria-label="LinkedIn"><Linkedin size={18} /></a>
-            </div>
-          </div>
+          </motion.div>
 
-          <div className="footer__links">
-            <h4>Product</h4>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#changelog">Changelog</a>
-            <a href="#roadmap">Roadmap</a>
-          </div>
-
-          <div className="footer__links">
-            <h4>Resources</h4>
-            <a href="#docs">Documentation</a>
-            <a href="#guides">Guides</a>
-            <a href="#api">API Reference</a>
-            <a href="#status">Status</a>
-          </div>
-
-          <div className="footer__links">
-            <h4>Company</h4>
-            <a href="#about">About</a>
-            <a href="#blog">Blog</a>
-            <a href="#careers">Careers</a>
-            <a href="#contact">Contact</a>
-          </div>
-
-          <div className="footer__links">
-            <h4>Legal</h4>
-            <a href="#privacy">Privacy</a>
-            <a href="#terms">Terms</a>
-            <a href="#security">Security</a>
-          </div>
+          <motion.div 
+            className="footer__links"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category} className="footer__column">
+                <h4 className="footer__column-title">{category}</h4>
+                <ul className="footer__column-links">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a href="#">{link}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
-        <div className="footer__bottom">
-          <p>© 2026 Axiom. All rights reserved.</p>
-        </div>
+        <motion.div 
+          className="footer__bottom"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <p className="footer__copyright">
+            © {new Date().getFullYear()} Axiom. All rights reserved.
+          </p>
+          <div className="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </motion.div>
       </div>
     </footer>
   )

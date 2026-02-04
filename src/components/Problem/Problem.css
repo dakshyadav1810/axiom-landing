@@ -1,9 +1,15 @@
 .problem {
-  background: var(--bg-secondary);
+  position: relative;
 }
 
-.problem__grid {
-  margin-top: 48px;
+.problem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
 }
 
 .problem__card {
@@ -11,15 +17,16 @@
 }
 
 .problem__icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--accent-red);
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--error);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
 }
 
 .problem__title {
@@ -29,5 +36,5 @@
 
 .problem__description {
   font-size: 0.9375rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }

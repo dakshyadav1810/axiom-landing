@@ -1,4 +1,5 @@
 import { Video, Layers, CheckCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 import './Solution.css'
 
 const solutions = [
@@ -19,11 +20,36 @@ const solutions = [
   }
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+  }
+}
+
 export default function Solution() {
   return (
     <section className="solution">
       <div className="container">
-        <div className="section-header">
+        <motion.div 
+          className="section-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="section-header__label">The Solution</span>
           <h2 className="section-header__title">
             Testing without the overhead
@@ -32,21 +58,38 @@ export default function Solution() {
             Axiom lets you validate what matters—without deep QA expertise, 
             brittle scripts, or complex tooling.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="solution__grid grid grid--3">
+        <motion.div 
+          className="solution__grid grid grid--3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {solutions.map((solution, index) => (
-            <div key={index} className="solution__card card">
+            <motion.div 
+              key={index} 
+              className="solution__card card"
+              variants={itemVariants}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            >
               <div className="solution__icon">
                 <solution.icon size={24} />
               </div>
               <h3 className="solution__title">{solution.title}</h3>
               <p className="solution__description">{solution.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="solution__highlights">
+        <motion.div 
+          className="solution__highlights"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <div className="solution__highlight">
             <CheckCircle size={16} />
             <span>No test writing</span>
@@ -59,7 +102,7 @@ export default function Solution() {
             <CheckCircle size={16} />
             <span>No QA expertise required</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

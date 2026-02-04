@@ -1,52 +1,103 @@
 .final-cta {
-  padding: 120px 0;
   position: relative;
+  padding: 160px 0;
   overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
 }
 
 .final-cta__glow {
   position: absolute;
-  bottom: -200px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 800px;
   height: 400px;
-  background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(48, 221, 190, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
+.final-cta__rays {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.final-cta__ray {
+  position: absolute;
+  top: -100px;
+  width: 2px;
+  height: 300px;
+  background: linear-gradient(180deg, rgba(48, 221, 190, 0.3) 0%, transparent 100%);
+  opacity: 0.3;
+}
+
+.final-cta__ray:nth-child(1) {
+  left: 30%;
+  transform: rotate(-10deg);
+}
+
+.final-cta__ray:nth-child(2) {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.final-cta__ray:nth-child(3) {
+  left: 70%;
+  transform: rotate(10deg);
+}
+
 .final-cta__content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
   position: relative;
   z-index: 1;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .final-cta__title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  margin-bottom: 16px;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, var(--text-primary) 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .final-cta__description {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
   margin-bottom: 40px;
 }
 
 .final-cta__actions {
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 16px;
+  margin-bottom: 32px;
 }
 
-.btn--large {
-  padding: 18px 36px;
-  font-size: 1rem;
+.final-cta__actions .btn--lg {
+  padding: 18px 40px;
+  font-size: 1.0625rem;
 }
 
-@media (max-width: 640px) {
-  .final-cta__actions {
-    flex-direction: column;
-  }
+.final-cta__note {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
 }

@@ -1,4 +1,5 @@
 import { Clock, AlertTriangle, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
 import './Problem.css'
 
 const problems = [
@@ -19,11 +20,36 @@ const problems = [
   }
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+  }
+}
+
 export default function Problem() {
   return (
     <section className="problem">
       <div className="container">
-        <div className="section-header">
+        <motion.div 
+          className="section-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="section-header__label">The Problem</span>
           <h2 className="section-header__title">
             Teams ship fast but test late
@@ -32,19 +58,30 @@ export default function Problem() {
             Modern development moves quickly. Traditional QA can't keep up—and 
             most teams don't have the time or expertise to do it right.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="problem__grid grid grid--3">
+        <motion.div 
+          className="problem__grid grid grid--3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {problems.map((problem, index) => (
-            <div key={index} className="problem__card card">
+            <motion.div 
+              key={index} 
+              className="problem__card card"
+              variants={itemVariants}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            >
               <div className="problem__icon">
                 <problem.icon size={24} />
               </div>
               <h3 className="problem__title">{problem.title}</h3>
               <p className="problem__description">{problem.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

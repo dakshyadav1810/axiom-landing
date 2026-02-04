@@ -1,115 +1,157 @@
-import { AlertTriangle, CheckCircle, XCircle, Copy, Clock } from 'lucide-react'
+import { CheckCircle2, XCircle, Clock, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import './TestReport.css'
+
+const testSteps = [
+  { status: 'pass', action: 'Navigate to login page', time: '0.3s' },
+  { status: 'pass', action: 'Enter email "test@example.com"', time: '0.1s' },
+  { status: 'pass', action: 'Enter password', time: '0.1s' },
+  { status: 'pass', action: 'Click "Sign In" button', time: '0.2s' },
+  { status: 'fail', action: 'Wait for dashboard to load', time: '5.0s' },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+}
+
+const stepVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.4 }
+  }
+}
 
 export default function TestReport() {
   return (
     <section className="test-report">
+      <div className="test-report__glow" />
       <div className="container">
-        <div className="section-header">
-          <span className="section-header__label">Test Reports</span>
-          <h2 className="section-header__title">
-            Results you can act on
-          </h2>
-          <p className="section-header__description">
-            Every test run produces a clear, actionable report—not just pass/fail, 
-            but exactly what went wrong and how to fix it.
-          </p>
-        </div>
+        <div className="test-report__layout">
+          <motion.div 
+            className="test-report__content"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="section-header__label">Test Reports</span>
+            <h2 className="section-header__title" style={{ textAlign: 'left' }}>
+              Clarity when it matters most
+            </h2>
+            <p className="test-report__description">
+              Every test run produces a complete, readable report. No guesswork. 
+              See exactly what happened, where it failed, and how to fix it.
+            </p>
+            <ul className="test-report__benefits">
+              <motion.li
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <CheckCircle2 size={18} />
+                Step-by-step execution trace
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                <CheckCircle2 size={18} />
+                Screenshots at each step
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
+                <CheckCircle2 size={18} />
+                AI-powered fix suggestions
+              </motion.li>
+            </ul>
+          </motion.div>
 
-        <div className="test-report__preview">
-          <div className="test-report__window">
-            <div className="test-report__header">
-              <div className="test-report__header-left">
-                <span className="test-report__title">Test Report</span>
-                <span className="test-report__meta">
+          <motion.div 
+            className="test-report__demo"
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <div className="test-report__card">
+              <div className="test-report__header">
+                <div className="test-report__dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div className="test-report__title-bar">
+                  <span className="test-report__icon">
+                    <XCircle size={16} />
+                  </span>
+                  Login Flow Test
+                </div>
+                <div className="test-report__time">
                   <Clock size={14} />
-                  Run completed 2 min ago
-                </span>
+                  5.7s
+                </div>
               </div>
-              <div className="test-report__score">
-                <span className="test-report__score-label">Quality Score</span>
-                <span className="test-report__score-value test-report__score-value--warning">72</span>
-              </div>
+              <motion.div 
+                className="test-report__steps"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                {testSteps.map((step, index) => (
+                  <motion.div 
+                    key={index} 
+                    className={`test-report__step ${step.status}`}
+                    variants={stepVariants}
+                  >
+                    <span className="test-report__step-icon">
+                      {step.status === 'pass' ? (
+                        <CheckCircle2 size={16} />
+                      ) : (
+                        <XCircle size={16} />
+                      )}
+                    </span>
+                    <span className="test-report__step-action">{step.action}</span>
+                    <span className="test-report__step-time">{step.time}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+              <motion.div 
+                className="test-report__suggestion"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="test-report__suggestion-header">
+                  <span className="test-report__suggestion-icon">💡</span>
+                  Suggested Fix
+                </div>
+                <p>Dashboard API returned 502. Check your /api/dashboard endpoint for timeout issues.</p>
+                <button className="test-report__suggestion-link">
+                  View full trace <ArrowRight size={14} />
+                </button>
+              </motion.div>
             </div>
-
-            <div className="test-report__warning">
-              <AlertTriangle size={18} />
-              <div>
-                <strong>Do not ship</strong>
-                <span>2 critical flows are failing. Review and fix before deploying.</span>
-              </div>
-            </div>
-
-            <div className="test-report__flows">
-              <div className="test-report__flow test-report__flow--passed">
-                <CheckCircle size={18} />
-                <div className="test-report__flow-info">
-                  <span className="test-report__flow-name">User signup flow</span>
-                  <span className="test-report__flow-time">1.2s</span>
-                </div>
-              </div>
-
-              <div className="test-report__flow test-report__flow--passed">
-                <CheckCircle size={18} />
-                <div className="test-report__flow-info">
-                  <span className="test-report__flow-name">Dashboard navigation</span>
-                  <span className="test-report__flow-time">0.8s</span>
-                </div>
-              </div>
-
-              <div className="test-report__flow test-report__flow--failed">
-                <XCircle size={18} />
-                <div className="test-report__flow-info">
-                  <span className="test-report__flow-name">Checkout flow</span>
-                  <span className="test-report__flow-time">Failed at step 3</span>
-                </div>
-              </div>
-
-              <div className="test-report__failure">
-                <div className="test-report__failure-header">
-                  <span>Payment button not clickable</span>
-                </div>
-                <p className="test-report__failure-description">
-                  The "Complete Purchase" button was obscured by an overlay element. 
-                  This may be a z-index issue or the button may be disabled.
-                </p>
-                <div className="test-report__fix">
-                  <div className="test-report__fix-header">
-                    <Lightbulb size={14} />
-                    <span>Suggested fix</span>
-                    <button className="test-report__copy">
-                      <Copy size={12} />
-                      Copy
-                    </button>
-                  </div>
-                  <code className="test-report__fix-code">
-                    .payment-overlay {"{"} z-index: 10; {"}"}<br/>
-                    .checkout-button {"{"} z-index: 20; position: relative; {"}"}
-                  </code>
-                </div>
-              </div>
-
-              <div className="test-report__flow test-report__flow--failed">
-                <XCircle size={18} />
-                <div className="test-report__flow-info">
-                  <span className="test-report__flow-name">Password reset</span>
-                  <span className="test-report__flow-time">Timeout after 30s</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
-  )
-}
-
-function Lightbulb({ size }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 18h6"/>
-      <path d="M10 22h4"/>
-      <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
-    </svg>
   )
 }

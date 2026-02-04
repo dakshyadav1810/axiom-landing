@@ -1,67 +1,101 @@
-import { Check, X } from 'lucide-react'
+import { Rocket, Users, Briefcase } from 'lucide-react'
+import { motion } from 'framer-motion'
 import './WhoItsFor.css'
 
-const forItems = [
-  'Teams shipping fast',
-  'Founders without dedicated QA',
-  'Products under active development',
-  'Developers using AI-assisted tools',
-  'Agencies delivering client projects'
+const audiences = [
+  {
+    icon: Rocket,
+    title: 'Startups',
+    description: 'Ship faster without sacrificing quality. No QA team required—just record, run, and go.',
+    features: ['Quick setup', 'No overhead', 'Scale as you grow']
+  },
+  {
+    icon: Users,
+    title: 'Product Teams',
+    description: 'Validate features without waiting for engineering. Keep your release cycle tight.',
+    features: ['No code required', 'PM-friendly', 'Fast feedback loops']
+  },
+  {
+    icon: Briefcase,
+    title: 'Agencies',
+    description: 'Deliver client work with confidence. Prove that everything works before handoff.',
+    features: ['Client-ready reports', 'Multi-project support', 'White-label ready']
+  }
 ]
 
-const notForItems = [
-  'Heavy enterprise QA pipelines',
-  'Compliance-grade audit requirements',
-  'Teams with full-time QA engineers',
-  'Legacy systems with no active development'
-]
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+  }
+}
 
 export default function WhoItsFor() {
   return (
-    <section className="who-its-for">
+    <section id="who-its-for" className="who-its-for">
+      <div className="who-its-for__glow" />
       <div className="container">
-        <div className="section-header">
+        <motion.div 
+          className="section-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="section-header__label">Who It's For</span>
           <h2 className="section-header__title">
-            Built for speed, not bureaucracy
+            Built for teams that move fast
           </h2>
           <p className="section-header__description">
-            Axiom is designed for teams that move fast and need confidence, 
-            not checkbox compliance.
+            Whether you're a solo founder or a growing product team, 
+            Axiom fits into the way you already work.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="who-its-for__grid">
-          <div className="who-its-for__card who-its-for__card--for">
-            <h3 className="who-its-for__card-title">
-              <Check size={20} />
-              Perfect for
-            </h3>
-            <ul className="who-its-for__list">
-              {forItems.map((item, index) => (
-                <li key={index}>
-                  <Check size={16} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="who-its-for__card who-its-for__card--not-for">
-            <h3 className="who-its-for__card-title">
-              <X size={20} />
-              Not designed for
-            </h3>
-            <ul className="who-its-for__list">
-              {notForItems.map((item, index) => (
-                <li key={index}>
-                  <X size={16} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <motion.div 
+          className="who-its-for__grid grid grid--3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {audiences.map((audience, index) => (
+            <motion.div 
+              key={index} 
+              className="who-its-for__card"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(48, 221, 190, 0.1)',
+                transition: { duration: 0.3 } 
+              }}
+            >
+              <div className="who-its-for__icon">
+                <audience.icon size={28} />
+              </div>
+              <h3 className="who-its-for__title">{audience.title}</h3>
+              <p className="who-its-for__description">{audience.description}</p>
+              <ul className="who-its-for__features">
+                {audience.features.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

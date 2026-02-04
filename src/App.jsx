@@ -13,6 +13,11 @@ import Footer from './components/Footer/Footer'
 export default function App() {
   return (
     <>
+      {/* Underwater background effects */}
+      <div className="bg-underwater" />
+      <div className="bg-rays" />
+      <div className="bg-glow" />
+      
       <Navbar />
       <main>
         <Hero />
