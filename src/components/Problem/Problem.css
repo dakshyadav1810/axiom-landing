@@ -1,0 +1,33 @@
+.problem {
+  background: var(--bg-secondary);
+}
+
+.problem__grid {
+  margin-top: 48px;
+}
+
+.problem__card {
+  text-align: left;
+}
+
+.problem__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-red);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.problem__title {
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.problem__description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}

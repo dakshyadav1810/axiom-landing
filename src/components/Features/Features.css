@@ -1,0 +1,26 @@
+.features__card {
+  text-align: left;
+}
+
+.features__icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 100%);
+  color: var(--accent-purple-light);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.features__title {
+  font-size: 1.125rem;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.features__description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
