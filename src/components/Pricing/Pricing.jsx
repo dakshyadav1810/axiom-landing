@@ -7,10 +7,10 @@ const plans = [
     name: 'Free',
     price: '$0',
     period: 'forever',
-    description: 'For side projects and tire-kickers. No credit card, no commitment, no guilt.',
+    description: 'Try Axiom on a side project. No credit card required.',
     features: [
       '3 recorded tests',
-      '50 test runs per month',
+      '50 test runs / month',
       'Basic reports',
       'Community support'
     ],
@@ -21,7 +21,7 @@ const plans = [
     name: 'Pro',
     price: '$29',
     period: 'per month',
-    description: 'For when your side project becomes your main project. Most people land here.',
+    description: 'For indie hackers and small teams shipping regularly.',
     features: [
       'Unlimited tests',
       'Unlimited runs',
@@ -37,7 +37,7 @@ const plans = [
     name: 'Team',
     price: '$99',
     period: 'per month',
-    description: 'For actual teams with actual collaboration needs. Fancy.',
+    description: 'For growing teams that need collaboration.',
     features: [
       'Everything in Pro',
       '5 team members',
@@ -56,7 +56,7 @@ export default function Pricing() {
     <section id="pricing" className="pricing">
       <div className="pricing__glow" />
       <div className="container">
-        <motion.div
+        <motion.div 
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,14 +65,14 @@ export default function Pricing() {
         >
           <span className="section-header__label">Pricing</span>
           <h2 className="section-header__title">
-            Free until you need more. Simple.
+            Start free, scale when ready
           </h2>
           <p className="section-header__description">
-            Start with zero dollars and zero commitment. Upgrade when your testing needs outgrow the free tier. No pressure, no sales calls, no "let's schedule a demo."
+            No credit card required. Upgrade as your testing needs grow.
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.div 
           className="pricing__grid"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,16 +80,16 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
         >
           {plans.map((plan, index) => (
-            <motion.div
-              key={index}
+            <motion.div 
+              key={index} 
               className={`pricing__card ${plan.popular ? 'pricing__card--popular' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              whileHover={{
+              whileHover={{ 
                 y: -8,
-                transition: { duration: 0.2 }
+                transition: { duration: 0.2 } 
               }}
             >
               {plan.popular && (
@@ -98,7 +98,7 @@ export default function Pricing() {
                   <span>Most Popular</span>
                 </div>
               )}
-
+              
               <div className="pricing__header">
                 <h3 className="pricing__name">{plan.name}</h3>
                 <div className="pricing__price-row">
@@ -107,7 +107,7 @@ export default function Pricing() {
                 </div>
                 <p className="pricing__description">{plan.description}</p>
               </div>
-
+              
               <ul className="pricing__features">
                 {plan.features.map((feature, i) => (
                   <li key={i}>
@@ -116,8 +116,8 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-
-              <motion.button
+              
+              <motion.button 
                 className={`pricing__cta ${plan.popular ? 'pricing__cta--primary' : ''}`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -130,14 +130,14 @@ export default function Pricing() {
         </motion.div>
 
         {/* Trust indicator */}
-        <motion.p
+        <motion.p 
           className="pricing__trust"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          Try free for 14 days. If you don't love it, just leave. We'll survive.
+          14-day free trial on all paid plans • Cancel anytime
         </motion.p>
       </div>
     </section>

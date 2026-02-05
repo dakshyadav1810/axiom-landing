@@ -12,33 +12,33 @@ import './Features.css'
 const features = [
   {
     SVG: FlowRecordingSVG,
-    title: 'Point and click recording',
-    description: 'Record tests by using your app. No code. No weird configuration files. Just click around like you normally would.'
+    title: 'Manual flow recording',
+    description: 'Record user journeys by clicking through your app. No code, no selectors, no configuration.'
   },
   {
     SVG: ElementResolutionSVG,
-    title: 'Tests that actually survive',
-    description: 'Your UI changes. Class names change. IDs change. Our tests adapt. They find the button even when you rename it.'
+    title: 'Smart element resolution',
+    description: 'Axiom finds elements intelligently, even when IDs change or DOM structure shifts.'
   },
   {
     SVG: ChaosTestingSVG,
     title: 'Chaos testing profiles',
-    description: 'Slow 3G? Tiny mobile screen? Flaky API? Test all of that automatically without writing a single line of code.'
+    description: 'Simulate slow networks, mobile viewports, and edge conditions automatically.'
   },
   {
     SVG: TestReportsSVG,
-    title: 'Reports you can actually use',
-    description: 'When something fails, you get screenshots, timings, and exactly what went wrong. Not a cryptic stack trace.'
+    title: 'Clear test reports',
+    description: 'Every run produces a detailed report with screenshots, timings, and failure context.'
   },
   {
     SVG: FixSuggestionsSVG,
-    title: 'Fix suggestions that work',
-    description: 'We don\'t just tell you it broke. We tell you why and how to fix it. Copy, paste, deploy.'
+    title: 'Actionable fix suggestions',
+    description: 'When tests fail, get specific, copyable suggestions to resolve the issue.'
   },
   {
     SVG: ScheduledRunsSVG,
-    title: 'Run on autopilot',
-    description: 'Set it and forget it. Tests run on a schedule or trigger from your CI. You only hear from us when something breaks.'
+    title: 'Scheduled test runs',
+    description: 'Run tests on a schedule or trigger them from CI. Always know your app is working.'
   }
 ]
 
@@ -54,8 +54,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
+  visible: { 
+    opacity: 1, 
     y: 0,
     transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
   }
@@ -68,9 +68,9 @@ export default function Features() {
       <div className="features__bg" aria-hidden="true">
         <div className="features__grid-lines" />
       </div>
-
+      
       <div className="container">
-        <motion.div
+        <motion.div 
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -79,14 +79,14 @@ export default function Features() {
         >
           <span className="section-header__label">Features</span>
           <h2 className="section-header__title">
-            The stuff that makes this actually useful
+            Built for how you actually work
           </h2>
           <p className="section-header__description">
-            We built Axiom because existing tools either require a PhD in testing frameworks or break every time you push. Here's what we got right.
+            Everything you need to test with confidence—nothing you don't.
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.div 
           className="features__grid"
           variants={containerVariants}
           initial="hidden"
@@ -94,20 +94,20 @@ export default function Features() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {features.map((feature, index) => (
-            <motion.div
-              key={index}
+            <motion.div 
+              key={index} 
               className="features__card"
               variants={itemVariants}
-              whileHover={{
+              whileHover={{ 
                 y: -6,
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 } 
               }}
             >
               {/* SVG Visual */}
               <div className="features__visual">
                 <feature.SVG />
               </div>
-
+              
               {/* Content */}
               <div className="features__content">
                 <h3 className="features__title">{feature.title}</h3>

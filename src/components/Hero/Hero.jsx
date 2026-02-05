@@ -1,10 +1,20 @@
 import { ArrowRight, Play } from 'lucide-react'
 import { motion } from 'framer-motion'
+import PerlinBackground from '../PerlinBackground/PerlinBackground'
 import './Hero.css'
 
 export default function Hero() {
   return (
     <section className="hero">
+      {/* Perlin noise flowing lines from center */}
+      <PerlinBackground
+        lineCount={150}
+        lineLength={500}
+        opacity={0.08}
+        speed={15}
+        color={{ r: 48, g: 221, b: 190 }}
+      />
+
       {/* Grainy atmospheric depth layers */}
       <div className="hero__noise-layer" aria-hidden="true" />
       <div className="hero__particles" aria-hidden="true" />
@@ -18,6 +28,9 @@ export default function Hero() {
 
       <div className="hero__glow-orb" />
       <div className="hero__vignette" aria-hidden="true" />
+
+      {/* Architectural margin lines */}
+      <div className="hero__margin-lines" aria-hidden="true" />
 
       <div className="container hero__container">
         <motion.div
@@ -45,7 +58,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Record a user flow once. Run it automatically before every deploy. Stop manually clicking through the same screens like it's 2015.
+          Axiom tests real user flows under real-world conditions,without
+          the overhead of traditional QA.
         </motion.p>
 
         <motion.div
@@ -74,12 +88,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        <motion.div
-          className="hero__preview"
-          initial={{ opacity: 0, y: 60, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        >
+        <div className="hero__preview">
           <div className="hero__preview-window">
             <div className="hero__preview-header">
               <div className="hero__preview-dots">
@@ -156,8 +165,8 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </section >
   )
 }

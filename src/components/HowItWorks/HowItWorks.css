@@ -1,247 +1,261 @@
 .how-it-works {
   position: relative;
-  overflow: hidden;
+  /* Height determines scroll distance for all 3 steps */
+  height: 300vh;
 }
 
-.how-it-works::before {
-  content: '';
-  position: absolute;
+/* Sticky container - stays fixed while scrolling */
+.how-it-works__sticky {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
 }
 
+/* Background glow */
 .how-it-works__glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 400px;
-  background: radial-gradient(ellipse at center, rgba(48, 221, 190, 0.04) 0%, transparent 60%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(48, 221, 190, 0.03) 0%, transparent 70%);
   pointer-events: none;
 }
 
-/* ===== Stepper Navigation ===== */
-.how-it-works__stepper {
-  max-width: 700px;
-  margin: 0 auto 48px;
+/* ===== Main Layout ===== */
+.how-it-works__main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-top: 40px;
+  align-items: start;
 }
 
-.how-it-works__progress {
-  height: 2px;
-  background: var(--border-subtle);
-  border-radius: 2px;
-  margin-bottom: 24px;
-  overflow: hidden;
-}
-
-.how-it-works__progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), rgba(48, 221, 190, 0.6));
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.how-it-works__tabs {
+/* ===== Step Indicators (Left) ===== */
+.how-it-works__steps {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 0;
 }
 
-.how-it-works__tab {
-  flex: 1;
+.how-it-works__step {
   display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 0;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+
+.how-it-works__step--active {
+  opacity: 1;
+}
+
+.how-it-works__step--complete {
+  opacity: 0.6;
+}
+
+/* Step indicator with progress bar */
+.how-it-works__step-indicator {
+  position: relative;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px 20px;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: var(--text-secondary);
 }
 
-.how-it-works__tab:hover {
-  border-color: rgba(48, 221, 190, 0.3);
-  background: rgba(48, 221, 190, 0.03);
-}
-
-.how-it-works__tab--active {
-  border-color: rgba(48, 221, 190, 0.5);
-  background: rgba(48, 221, 190, 0.08);
-  color: var(--text-primary);
-}
-
-.how-it-works__tab-number {
+.how-it-works__step-number {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--accent);
-  opacity: 0.6;
+  padding: 6px 0;
+  position: relative;
+  z-index: 2;
 }
 
-.how-it-works__tab--active .how-it-works__tab-number {
-  opacity: 1;
+/* Vertical progress line */
+.how-it-works__step-indicator::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.how-it-works__tab-title {
-  font-size: 0.875rem;
+.how-it-works__step:last-child .how-it-works__step-indicator::after {
+  display: none;
+}
+
+/* Progress fill */
+.how-it-works__step-progress {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 48px;
+  background: var(--accent);
+  transform-origin: top;
+  z-index: 1;
+}
+
+.how-it-works__step-label {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.how-it-works__step-title {
+  font-size: 0.9375rem;
   font-weight: 500;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
-/* ===== Content Panel ===== */
+.how-it-works__step--active .how-it-works__step-title {
+  color: var(--accent);
+}
+
+/* ===== Content Panel (Right) ===== */
 .how-it-works__content {
-  max-width: 900px;
-  margin: 0 auto;
+  position: relative;
+  min-height: 360px;
 }
 
 .how-it-works__panel {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  padding: 48px;
-  background: rgba(10, 12, 18, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .how-it-works__icon {
-  width: 80px;
-  height: 80px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(48, 221, 190, 0.08);
   border: 1px solid rgba(48, 221, 190, 0.15);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   color: var(--accent);
-}
-
-.how-it-works__text {
-  text-align: left;
+  margin-bottom: 24px;
 }
 
 .how-it-works__panel-title {
   font-size: 1.5rem;
   font-weight: 500;
-  margin-bottom: 12px;
   color: var(--text-primary);
+  margin: 0 0 12px;
 }
 
 .how-it-works__panel-description {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.7;
   color: var(--text-secondary);
-  margin-bottom: 16px;
+  margin: 0 0 8px;
+  max-width: 480px;
 }
 
 .how-it-works__panel-detail {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-tertiary);
-  margin: 0;
+  margin: 0 0 32px;
+  max-width: 440px;
 }
 
-/* Visual SVG area */
+/* Visual illustration */
 .how-it-works__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(48, 221, 190, 0.02);
-  border: 1px solid rgba(48, 221, 190, 0.08);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  min-height: 160px;
+  margin-top: 24px;
 }
 
 .how-it-works__svg {
   width: 100%;
-  max-width: 200px;
+  max-width: 360px;
   height: auto;
 }
 
-/* ===== Navigation Buttons ===== */
-.how-it-works__nav {
+/* ===== Scroll Hint ===== */
+.how-it-works__scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.how-it-works__nav-btn {
-  padding: 12px 24px;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.how-it-works__nav-btn:hover:not(:disabled) {
-  border-color: rgba(48, 221, 190, 0.3);
-  color: var(--text-primary);
-}
-
-.how-it-works__nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.how-it-works__nav-btn--primary {
-  background: rgba(48, 221, 190, 0.1);
-  border-color: rgba(48, 221, 190, 0.3);
+.how-it-works__scroll-arrow {
+  font-size: 1rem;
   color: var(--accent);
-}
-
-.how-it-works__nav-btn--primary:hover:not(:disabled) {
-  background: rgba(48, 221, 190, 0.15);
-  border-color: rgba(48, 221, 190, 0.5);
+  opacity: 0.6;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
-  .how-it-works__panel {
+  .how-it-works__main {
     grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .how-it-works__steps {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .how-it-works__step {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
     text-align: center;
-    padding: 32px;
   }
-  
-  .how-it-works__icon {
-    margin: 0 auto;
+
+  .how-it-works__step-indicator::after {
+    display: none;
   }
-  
-  .how-it-works__text {
-    text-align: center;
-  }
-  
-  .how-it-works__visual {
-    order: -1;
+
+  .how-it-works__step-progress {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
-  .how-it-works__tabs {
-    flex-direction: column;
+  .how-it-works {
+    height: 250vh;
   }
-  
-  .how-it-works__tab {
-    justify-content: flex-start;
-    padding: 14px 18px;
+
+  .how-it-works__sticky {
+    padding: 60px 0;
   }
-  
-  .how-it-works__nav {
-    flex-direction: column;
+
+  .how-it-works__content {
+    min-height: 300px;
   }
-  
-  .how-it-works__nav-btn {
-    width: 100%;
+
+  .how-it-works__panel-title {
+    font-size: 1.25rem;
+  }
+
+  .how-it-works__panel-description {
+    font-size: 1rem;
+  }
+
+  .how-it-works__scroll-hint {
+    bottom: 20px;
   }
 }

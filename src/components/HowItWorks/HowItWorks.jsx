@@ -1,231 +1,232 @@
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Link, MousePointer, Play } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import './HowItWorks.css'
 
 const steps = [
   {
     number: '01',
     icon: Link,
-    title: 'Paste your URL',
-    description: 'That\'s literally it. No SDK, no code snippet, no 47-step integration guide. Just your URL.',
-    detail: 'React, Vue, Next.js, plain HTML. We don\'t care what you\'re running. If it\'s on the web, we can test it.'
+    title: 'Connect your app',
+    description: 'Point Axiom at any deployed URL. No SDKs, no code changes, no infrastructure to manage.',
+    detail: 'Works with any web app—React, Vue, Next.js, or plain HTML. Just paste your URL.'
   },
   {
     number: '02',
     icon: MousePointer,
-    title: 'Click through it once',
-    description: 'You already do this manually before every deploy. This time, we\'re watching.',
-    detail: 'Walk through signup, checkout, whatever matters. We record every click, every input, every step.'
+    title: 'Record the flow',
+    description: 'Walk through the user journey once. Axiom captures every interaction and builds a test.',
+    detail: 'Click through signup, checkout, or any critical path. Axiom watches and learns.'
   },
   {
     number: '03',
     icon: Play,
-    title: 'Never do it again',
-    description: 'That flow you just recorded? It runs automatically now. Before every deploy. Forever.',
-    detail: 'Something breaks? You\'ll know immediately. With screenshots, context, and suggestions for what went wrong.'
+    title: 'Run and review',
+    description: 'Execute tests on demand or on schedule. Get clear pass/fail results with fixes.',
+    detail: 'Run before every deploy, or set up automated checks. Know your app works.'
   }
 ]
 
 export default function HowItWorks() {
+  const containerRef = useRef(null)
   const [activeStep, setActiveStep] = useState(0)
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  })
+
+  // Update active step based on scroll position
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (value) => {
+      // Divide scroll into 3 equal sections
+      const stepIndex = Math.min(
+        Math.floor(value * steps.length),
+        steps.length - 1
+      )
+      setActiveStep(stepIndex)
+    })
+    return () => unsubscribe()
+  }, [scrollYProgress])
+
+  // Progress through each step
+  const stepProgress = useTransform(scrollYProgress, [0, 1], [0, steps.length])
+
   return (
-    <section id="how-it-works" className="how-it-works">
-      <div className="how-it-works__glow" />
-
-      <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-header__label">How it works</span>
-          <h2 className="section-header__title">
-            Three steps. Five minutes. Done.
-          </h2>
-          <p className="section-header__description">
-            If you can click through your app, you can use Axiom. There's no learning curve because there's nothing to learn.
-          </p>
-        </motion.div>
-
-        {/* Stepper Navigation */}
-        <motion.div
-          className="how-it-works__stepper"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Progress bar */}
-          <div className="how-it-works__progress">
-            <div
-              className="how-it-works__progress-fill"
-              style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-            />
+    <section id="how-it-works" className="how-it-works" ref={containerRef}>
+      {/* Sticky container */}
+      <div className="how-it-works__sticky">
+        <div className="container">
+          {/* Header */}
+          <div className="section-header">
+            <span className="section-header__label">How It Works</span>
+            <h2 className="section-header__title">
+              Three steps to confidence
+            </h2>
           </div>
 
-          {/* Step tabs */}
-          <div className="how-it-works__tabs">
-            {steps.map((step, index) => (
-              <button
-                key={index}
-                className={`how-it-works__tab ${activeStep === index ? 'how-it-works__tab--active' : ''}`}
-                onClick={() => setActiveStep(index)}
-              >
-                <span className="how-it-works__tab-number">{step.number}</span>
-                <span className="how-it-works__tab-title">{step.title}</span>
-              </button>
-            ))}
-          </div>
-        </motion.div>
+          {/* Main content area */}
+          <div className="how-it-works__main">
+            {/* Left: Step indicators */}
+            <div className="how-it-works__steps">
+              {steps.map((step, index) => (
+                <div
+                  key={index}
+                  className={`how-it-works__step ${activeStep === index ? 'how-it-works__step--active' : ''} ${activeStep > index ? 'how-it-works__step--complete' : ''}`}
+                >
+                  <div className="how-it-works__step-indicator">
+                    <span className="how-it-works__step-number">{step.number}</span>
+                    <motion.div
+                      className="how-it-works__step-progress"
+                      style={{
+                        scaleY: activeStep > index ? 1 :
+                          activeStep === index ? useTransform(scrollYProgress,
+                            [index / steps.length, (index + 1) / steps.length],
+                            [0, 1]
+                          ) : 0
+                      }}
+                    />
+                  </div>
+                  <div className="how-it-works__step-label">
+                    <span className="how-it-works__step-title">{step.title}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-        {/* Step Content */}
-        <div className="how-it-works__content">
-          <AnimatePresence mode="wait">
+            {/* Right: Content panel */}
+            <div className="how-it-works__content">
+              {steps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="how-it-works__panel"
+                  initial={false}
+                  animate={{
+                    opacity: activeStep === index ? 1 : 0,
+                    y: activeStep === index ? 0 : 20,
+                    pointerEvents: activeStep === index ? 'auto' : 'none'
+                  }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  {/* Icon */}
+                  <div className="how-it-works__icon">
+                    <step.icon size={28} />
+                  </div>
+
+                  {/* Text */}
+                  <h3 className="how-it-works__panel-title">{step.title}</h3>
+                  <p className="how-it-works__panel-description">{step.description}</p>
+                  <p className="how-it-works__panel-detail">{step.detail}</p>
+
+                  {/* Visual */}
+                  <div className="how-it-works__visual">
+                    {index === 0 && <ConnectVisual active={activeStep === 0} />}
+                    {index === 1 && <RecordVisual active={activeStep === 1} />}
+                    {index === 2 && <RunVisual active={activeStep === 2} />}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="how-it-works__scroll-hint">
+            <span>Scroll to explore</span>
             <motion.div
-              key={activeStep}
-              className="how-it-works__panel"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              className="how-it-works__scroll-arrow"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
-              {/* Icon */}
-              <div className="how-it-works__icon">
-                {(() => {
-                  const IconComponent = steps[activeStep].icon
-                  return <IconComponent size={32} />
-                })()}
-              </div>
-
-              {/* Text */}
-              <div className="how-it-works__text">
-                <h3 className="how-it-works__panel-title">
-                  {steps[activeStep].title}
-                </h3>
-                <p className="how-it-works__panel-description">
-                  {steps[activeStep].description}
-                </p>
-                <p className="how-it-works__panel-detail">
-                  {steps[activeStep].detail}
-                </p>
-              </div>
-
-              {/* Visual illustration */}
-              <div className="how-it-works__visual">
-                {activeStep === 0 && <ConnectVisual />}
-                {activeStep === 1 && <RecordVisual />}
-                {activeStep === 2 && <RunVisual />}
-              </div>
+              ↓
             </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Navigation arrows */}
-        <div className="how-it-works__nav">
-          <button
-            className="how-it-works__nav-btn"
-            onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
-            disabled={activeStep === 0}
-          >
-            ← Previous
-          </button>
-          <button
-            className="how-it-works__nav-btn how-it-works__nav-btn--primary"
-            onClick={() => setActiveStep(prev => Math.min(steps.length - 1, prev + 1))}
-            disabled={activeStep === steps.length - 1}
-          >
-            Next →
-          </button>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-// Simple SVG visuals for each step
-function ConnectVisual() {
+// Visual components
+function ConnectVisual({ active }) {
   return (
-    <svg viewBox="0 0 200 120" fill="none" className="how-it-works__svg">
-      <rect x="20" y="20" width="160" height="80" rx="6" stroke="rgba(48, 221, 190, 0.4)" strokeWidth="1" fill="rgba(48, 221, 190, 0.03)" />
-      <rect x="20" y="20" width="160" height="20" rx="6" fill="rgba(48, 221, 190, 0.05)" />
-      <circle cx="34" cy="30" r="4" fill="rgba(255, 95, 87, 0.6)" />
-      <circle cx="48" cy="30" r="4" fill="rgba(254, 188, 46, 0.6)" />
-      <circle cx="62" cy="30" r="4" fill="rgba(40, 200, 64, 0.6)" />
-      <rect x="80" y="26" width="90" height="8" rx="4" fill="rgba(48, 221, 190, 0.1)" />
-      <text x="85" y="33" fill="rgba(48, 221, 190, 0.8)" fontSize="6" fontFamily="monospace">yourapp.com</text>
-      <motion.path
-        d="M100 70 L100 100 L140 100"
-        stroke="rgba(48, 221, 190, 0.5)"
-        strokeWidth="1.5"
-        strokeDasharray="4 4"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1, delay: 0.3 }}
-      />
-      <motion.circle
-        cx="145" cy="100" r="6"
-        fill="rgba(48, 221, 190, 0.2)"
-        stroke="rgba(48, 221, 190, 0.8)"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.3, delay: 1 }}
-      />
+    <svg viewBox="0 0 280 160" fill="none" className="how-it-works__svg">
+      <rect x="30" y="30" width="220" height="100" rx="6" stroke="rgba(48, 221, 190, 0.3)" strokeWidth="1" fill="rgba(48, 221, 190, 0.02)" />
+      <rect x="30" y="30" width="220" height="24" rx="6" fill="rgba(48, 221, 190, 0.04)" />
+      <circle cx="48" cy="42" r="4" fill="rgba(255, 95, 87, 0.5)" />
+      <circle cx="62" cy="42" r="4" fill="rgba(254, 188, 46, 0.5)" />
+      <circle cx="76" cy="42" r="4" fill="rgba(40, 200, 64, 0.5)" />
+      <rect x="100" y="38" width="140" height="8" rx="4" fill="rgba(48, 221, 190, 0.08)" />
+      <text x="108" y="45" fill="rgba(48, 221, 190, 0.6)" fontSize="7" fontFamily="monospace">https://yourapp.com</text>
+      {active && (
+        <motion.path
+          d="M140 90 L140 130 L200 130"
+          stroke="rgba(48, 221, 190, 0.4)"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        />
+      )}
     </svg>
   )
 }
 
-function RecordVisual() {
+function RecordVisual({ active }) {
   return (
-    <svg viewBox="0 0 200 120" fill="none" className="how-it-works__svg">
-      <rect x="30" y="25" width="140" height="70" rx="4" stroke="rgba(48, 221, 190, 0.3)" strokeWidth="1" fill="rgba(48, 221, 190, 0.02)" />
-      <rect x="45" y="40" width="50" height="20" rx="3" stroke="rgba(48, 221, 190, 0.4)" strokeWidth="1" fill="rgba(48, 221, 190, 0.05)" />
-      <rect x="105" y="45" width="50" height="12" rx="2" stroke="rgba(48, 221, 190, 0.4)" strokeWidth="1" fill="rgba(48, 221, 190, 0.05)" />
-      <rect x="60" y="70" width="80" height="16" rx="3" stroke="rgba(48, 221, 190, 0.6)" strokeWidth="1" fill="rgba(48, 221, 190, 0.1)" />
-      <motion.g
-        initial={{ x: 0, y: 0 }}
-        animate={{ x: [0, 60, 60, 30], y: [0, 10, 30, 30] }}
-        transition={{ duration: 3, repeat: Infinity, repeatDelay: 1 }}
-      >
-        <path d="M55 38 L55 52 L62 47 L67 55 L70 53 L65 45 L72 45 Z" fill="rgba(48, 221, 190, 0.9)" />
-      </motion.g>
-      <motion.circle
-        cx="170" cy="30" r="8"
-        fill="rgba(255, 107, 107, 0.8)"
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 1, repeat: Infinity }}
-      />
+    <svg viewBox="0 0 280 160" fill="none" className="how-it-works__svg">
+      <rect x="30" y="30" width="220" height="100" rx="4" stroke="rgba(48, 221, 190, 0.25)" strokeWidth="1" fill="rgba(48, 221, 190, 0.01)" />
+      <rect x="50" y="55" width="70" height="28" rx="4" stroke="rgba(48, 221, 190, 0.3)" fill="rgba(48, 221, 190, 0.03)" />
+      <rect x="140" y="60" width="90" height="18" rx="3" stroke="rgba(48, 221, 190, 0.3)" fill="rgba(48, 221, 190, 0.03)" />
+      <rect x="80" y="95" width="120" height="24" rx="4" stroke="rgba(48, 221, 190, 0.4)" fill="rgba(48, 221, 190, 0.06)" />
+      {active && (
+        <>
+          <motion.g
+            initial={{ x: 0, y: 0 }}
+            animate={{ x: [0, 90, 90, 30], y: [0, 15, 50, 50] }}
+            transition={{ duration: 3, repeat: Infinity, repeatDelay: 0.5 }}
+          >
+            <path d="M55 48 L55 62 L62 57 L67 65 L70 63 L65 55 L72 55 Z" fill="rgba(48, 221, 190, 0.8)" />
+          </motion.g>
+          <motion.circle
+            cx="235" cy="42" r="6"
+            fill="rgba(255, 100, 100, 0.7)"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1, repeat: Infinity }}
+          />
+        </>
+      )}
     </svg>
   )
 }
 
-function RunVisual() {
+function RunVisual({ active }) {
   return (
-    <svg viewBox="0 0 200 120" fill="none" className="how-it-works__svg">
-      <rect x="30" y="20" width="140" height="80" rx="4" stroke="rgba(48, 221, 190, 0.3)" strokeWidth="1" fill="rgba(48, 221, 190, 0.02)" />
-      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-        <rect x="45" y="35" width="12" height="12" rx="2" fill="rgba(48, 221, 190, 0.3)" />
-        <motion.path d="M48 41 L51 43 L56 38" stroke="rgba(48, 221, 190, 0.9)" strokeWidth="1.5" fill="none"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3, delay: 0.5 }} />
-        <rect x="65" y="38" width="90" height="6" rx="2" fill="rgba(48, 221, 190, 0.1)" />
-      </motion.g>
-      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-        <rect x="45" y="55" width="12" height="12" rx="2" fill="rgba(48, 221, 190, 0.3)" />
-        <motion.path d="M48 61 L51 63 L56 58" stroke="rgba(48, 221, 190, 0.9)" strokeWidth="1.5" fill="none"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3, delay: 0.9 }} />
-        <rect x="65" y="58" width="70" height="6" rx="2" fill="rgba(48, 221, 190, 0.1)" />
-      </motion.g>
-      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
-        <rect x="45" y="75" width="12" height="12" rx="2" fill="rgba(48, 221, 190, 0.3)" />
-        <motion.path d="M48 81 L51 83 L56 78" stroke="rgba(48, 221, 190, 0.9)" strokeWidth="1.5" fill="none"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3, delay: 1.3 }} />
-        <rect x="65" y="78" width="80" height="6" rx="2" fill="rgba(48, 221, 190, 0.1)" />
-      </motion.g>
+    <svg viewBox="0 0 280 160" fill="none" className="how-it-works__svg">
+      <rect x="30" y="25" width="220" height="110" rx="4" stroke="rgba(48, 221, 190, 0.25)" strokeWidth="1" fill="rgba(48, 221, 190, 0.01)" />
+      {[0, 1, 2].map((i) => (
+        <motion.g
+          key={i}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: active ? 1 : 0.3 }}
+          transition={{ delay: active ? 0.2 + i * 0.3 : 0 }}
+        >
+          <rect x="50" y={45 + i * 28} width="14" height="14" rx="3" fill="rgba(48, 221, 190, 0.2)" />
+          {active && (
+            <motion.path
+              d={`M53 ${52 + i * 28} L56 ${55 + i * 28} L62 ${49 + i * 28}`}
+              stroke="rgba(48, 221, 190, 0.8)"
+              strokeWidth="1.5"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.3, delay: 0.4 + i * 0.3 }}
+            />
+          )}
+          <rect x="75" y={49 + i * 28} width={100 - i * 15} height="6" rx="3" fill="rgba(48, 221, 190, 0.08)" />
+        </motion.g>
+      ))}
     </svg>
   )
 }

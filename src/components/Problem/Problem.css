@@ -1,5 +1,8 @@
 .problem {
   position: relative;
+  min-height: 100vh;
+  padding: var(--section-padding) 0;
+  overflow: visible;
 }
 
 .problem::before {
@@ -12,173 +15,233 @@
   background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
 }
 
-/* ===== Cascading Dominoes Layout ===== */
-.problem__dominoes {
+/* ===== Risk Meter Container ===== */
+.problem__meter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px 0 80px;
+}
+
+/* ===== Gauge ===== */
+.problem__gauge {
   position: relative;
-  max-width: 640px;
-  margin: 0 auto;
+  width: 320px;
+  height: 180px;
 }
 
-/* Vertical fall line */
-.problem__fall-line {
-  position: absolute;
-  left: 28px;
-  top: 40px;
-  bottom: 40px;
-  width: 40px;
-  pointer-events: none;
-}
-
-.problem__fall-svg {
+.problem__gauge-svg {
   width: 100%;
   height: 100%;
 }
 
-/* Individual domino */
-.problem__domino {
+/* Needle */
+.problem__needle {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 3px;
+  height: 70px;
+  background: linear-gradient(to top, var(--text-primary), transparent);
+  border-radius: 2px;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-90deg);
+  z-index: 5;
+}
+
+/* Needle pivot point */
+.problem__needle-pivot {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--bg-secondary);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  z-index: 6;
+}
+
+/* Value display - below gauge */
+.problem__gauge-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.problem__gauge-value {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.problem__gauge-status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  transition: color 0.3s ease;
+}
+
+/* Risk label below gauge */
+.problem__risk-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+/* ===== Risk Factors ===== */
+.problem__factors {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.problem__factor {
   display: flex;
   align-items: flex-start;
-  gap: 24px;
-  padding: 32px 0;
-  position: relative;
+  gap: 20px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  opacity: 0.4;
+  transition: all 0.4s ease;
 }
 
-.problem__domino:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 107, 107, 0.1);
+.problem__factor--active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Impact indicator (number circle) */
-.problem__impact {
-  position: relative;
+.problem__factor-indicator {
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.problem__number {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--error);
-  position: relative;
-  z-index: 2;
-}
-
-.problem__pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
+.problem__factor-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 107, 107, 0.3);
-  background: rgba(255, 107, 107, 0.05);
+  transition: all 0.3s ease;
 }
 
-.problem__domino:hover .problem__pulse {
-  animation: problem-pulse 1s ease-out;
+.problem__factor-dot--low {
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(48, 221, 190, 0.3);
 }
 
-@keyframes problem-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
+.problem__factor-dot--medium {
+  background: #ffd93d;
+  box-shadow: 0 0 12px rgba(255, 217, 61, 0.3);
+}
+
+.problem__factor-dot--high {
+  background: #ff6b6b;
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.3);
+}
+
+.problem__factor--active .problem__factor-dot {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 
-  100% {
-    transform: translate(-50%, -50%) scale(1.5);
-    opacity: 0;
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
   }
 }
 
-/* Content */
-.problem__content {
+.problem__factor-content {
   flex: 1;
-  padding-top: 4px;
 }
 
-.problem__title {
-  font-size: 1.25rem;
+.problem__factor-label {
+  font-size: 1.125rem;
   font-weight: 500;
-  margin-bottom: 10px;
   color: var(--text-primary);
-  line-height: 1.3;
+  margin: 0 0 6px;
 }
 
-/* Italic for quoted titles */
-.problem__title--quote {
-  font-style: italic;
-  color: var(--text-primary);
-}
-
-.problem__description {
+.problem__factor-desc {
   font-size: 0.9375rem;
-  line-height: 1.75;
+  line-height: 1.6;
   color: var(--text-tertiary);
   margin: 0;
 }
 
-/* Emphasize key phrases */
-.problem__description strong {
-  color: var(--error);
-  font-weight: 500;
+.problem__factor--active .problem__factor-label {
+  color: var(--text-primary);
 }
 
-/* Falling arrow */
-.problem__arrow {
-  position: absolute;
-  bottom: -12px;
-  left: 28px;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
-  color: rgba(255, 107, 107, 0.4);
-  z-index: 2;
-}
-
-.problem__domino:hover .problem__arrow {
-  color: rgba(255, 107, 107, 0.8);
-  animation: arrow-bounce 0.5s ease-in-out;
-}
-
-@keyframes arrow-bounce {
-
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) translateY(4px);
-  }
+.problem__factor--active .problem__factor-desc {
+  color: var(--text-secondary);
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 640px) {
-  .problem__fall-line {
-    left: 20px;
+@media (max-width: 768px) {
+  .problem__gauge {
+    width: 260px;
+    height: 150px;
   }
 
-  .problem__impact {
-    width: 44px;
-    height: 44px;
+  .problem__needle {
+    height: 70px;
   }
 
-  .problem__pulse {
-    width: 40px;
-    height: 40px;
+  .problem__gauge-value {
+    font-size: 2.5rem;
   }
 
-  .problem__domino {
+  .problem__factor {
+    padding: 20px;
     gap: 16px;
-    padding: 24px 0;
   }
 
-  .problem__arrow {
-    left: 20px;
+  .problem__factors {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .problem__gauge {
+    width: 220px;
+    height: 130px;
+  }
+
+  .problem__needle {
+    height: 55px;
+    bottom: 15px;
+  }
+
+  .problem__gauge-value {
+    font-size: 2rem;
+  }
+
+  .problem__gauge-center {
+    padding-top: 20px;
   }
 }
