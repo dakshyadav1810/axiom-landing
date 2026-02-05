@@ -8,19 +8,19 @@ export default function Hero() {
       {/* Grainy atmospheric depth layers */}
       <div className="hero__noise-layer" aria-hidden="true" />
       <div className="hero__particles" aria-hidden="true" />
-      
+
       {/* Underwater caustic light effect */}
       <div className="hero__caustics">
         <div className="hero__light-cone" />
         <div className="hero__caustic-layer hero__caustic-layer--1" />
         <div className="hero__caustic-layer hero__caustic-layer--2" />
       </div>
-      
+
       <div className="hero__glow-orb" />
       <div className="hero__vignette" aria-hidden="true" />
-      
+
       <div className="container hero__container">
-        <motion.div 
+        <motion.div
           className="hero__badge"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -29,8 +29,8 @@ export default function Hero() {
           <span className="hero__badge-dot" />
           Now in public beta
         </motion.div>
-        
-        <motion.h1 
+
+        <motion.h1
           className="hero__title"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,25 +38,25 @@ export default function Hero() {
         >
           Ship with <span className="hero__title-accent">Confidence</span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           className="hero__subtitle"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom tests real user flows under real-world conditions,without 
+          Axiom tests real user flows under real-world conditions, without
           the overhead of traditional QA.
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           className="hero__actions"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <motion.a 
-            href="#start" 
+          <motion.a
+            href="#start"
             className="btn btn--primary"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -64,8 +64,8 @@ export default function Hero() {
             Run your first test
             <ArrowRight size={18} />
           </motion.a>
-          <motion.a 
-            href="#demo" 
+          <motion.a
+            href="#demo"
             className="btn btn--secondary"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -75,7 +75,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="hero__preview"
           initial={{ opacity: 0, y: 60, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -101,7 +101,7 @@ export default function Hero() {
                 <div className="hero__preview-nav-item">Settings</div>
               </div>
               <div className="hero__preview-main">
-                <motion.div 
+                <motion.div
                   className="hero__preview-card hero__preview-card--score"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -110,10 +110,10 @@ export default function Hero() {
                   <div className="hero__preview-score-ring">
                     <svg viewBox="0 0 100 100">
                       <circle cx="50" cy="50" r="42" className="hero__preview-ring-bg" />
-                      <motion.circle 
-                        cx="50" 
-                        cy="50" 
-                        r="42" 
+                      <motion.circle
+                        cx="50"
+                        cy="50"
+                        r="42"
                         className="hero__preview-ring-fill"
                         initial={{ strokeDashoffset: 264 }}
                         animate={{ strokeDashoffset: 264 * (1 - 0.94) }}
@@ -127,7 +127,7 @@ export default function Hero() {
                     <span className="hero__preview-badge hero__preview-badge--success">Ready to ship</span>
                   </div>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="hero__preview-card"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -136,7 +136,7 @@ export default function Hero() {
                   <span className="hero__preview-label">Tests Run</span>
                   <span className="hero__preview-value">24</span>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="hero__preview-card"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ export default function Hero() {
                   <span className="hero__preview-label">Passed</span>
                   <span className="hero__preview-value hero__preview-value--success">22</span>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="hero__preview-card"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
