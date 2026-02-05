@@ -1,43 +1,18 @@
-import { Video, Layers, CheckCircle } from 'lucide-react'
+import { ArrowRight, X, Check } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './Solution.css'
 
-const solutions = [
-  {
-    icon: Video,
-    title: 'Record real user flows',
-    description: 'Capture the journeys that matter—signup, checkout, onboarding—without writing a single line of test code.'
-  },
-  {
-    icon: Layers,
-    title: 'Run under real conditions',
-    description: 'Test against slow networks, different viewports, and edge cases. See how your app actually behaves.'
-  },
-  {
-    icon: CheckCircle,
-    title: 'Get clear outcomes',
-    description: 'Pass or fail. No flaky tests, no ambiguous results. Just actionable feedback you can ship on.'
-  }
+const beforeItems = [
+  { text: 'Manual testing before every deploy' },
+  { text: 'Brittle scripts that break constantly' },
+  { text: 'Bugs discovered by users' }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
-  }
-}
+const afterItems = [
+  { text: 'Recorded flows run automatically' },
+  { text: 'Self-healing tests that adapt' },
+  { text: 'Issues caught before shipping' }
+]
 
 export default function Solution() {
   return (
@@ -52,57 +27,93 @@ export default function Solution() {
         >
           <span className="section-header__label">The Solution</span>
           <h2 className="section-header__title">
-            Testing without the overhead
+            From chaos to confidence
           </h2>
           <p className="section-header__description">
-            Axiom lets you validate what matters—without deep QA expertise, 
-            brittle scripts, or complex tooling.
+            Axiom eliminates the friction of testing so you can ship faster, 
+            with fewer surprises.
           </p>
         </motion.div>
 
+        {/* Before → After Split Panel */}
         <motion.div 
-          className="solution__grid grid grid--3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          className="solution__split"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
         >
-          {solutions.map((solution, index) => (
-            <motion.div 
-              key={index} 
-              className="solution__card card"
-              variants={itemVariants}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            >
-              <div className="solution__icon">
-                <solution.icon size={24} />
-              </div>
-              <h3 className="solution__title">{solution.title}</h3>
-              <p className="solution__description">{solution.description}</p>
-            </motion.div>
-          ))}
+          {/* Before Side */}
+          <div className="solution__side solution__side--before">
+            <div className="solution__side-noise" aria-hidden="true" />
+            <div className="solution__side-header">
+              <span className="solution__side-label solution__side-label--before">Before</span>
+              <span className="solution__side-tag">Without Axiom</span>
+            </div>
+            <ul className="solution__list">
+              {beforeItems.map((item, index) => (
+                <motion.li 
+                  key={index}
+                  className="solution__item solution__item--before"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <span className="solution__item-icon solution__item-icon--before">
+                    <X size={14} />
+                  </span>
+                  <span>{item.text}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Center Divider */}
+          <div className="solution__divider">
+            <div className="solution__divider-line" />
+            <div className="solution__divider-icon">
+              <ArrowRight size={20} />
+            </div>
+            <div className="solution__divider-line" />
+          </div>
+
+          {/* After Side */}
+          <div className="solution__side solution__side--after">
+            <div className="solution__side-header">
+              <span className="solution__side-label solution__side-label--after">After</span>
+              <span className="solution__side-tag solution__side-tag--active">With Axiom</span>
+            </div>
+            <ul className="solution__list">
+              {afterItems.map((item, index) => (
+                <motion.li 
+                  key={index}
+                  className="solution__item solution__item--after"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <span className="solution__item-icon solution__item-icon--after">
+                    <Check size={14} />
+                  </span>
+                  <span>{item.text}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
 
-        <motion.div 
-          className="solution__highlights"
+        {/* Bottom summary */}
+        <motion.p 
+          className="solution__summary"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="solution__highlight">
-            <CheckCircle size={16} />
-            <span>No test writing</span>
-          </div>
-          <div className="solution__highlight">
-            <CheckCircle size={16} />
-            <span>No brittle scripts</span>
-          </div>
-          <div className="solution__highlight">
-            <CheckCircle size={16} />
-            <span>No QA expertise required</span>
-          </div>
-        </motion.div>
+          No test scripts. No QA expertise. Just record, run, and ship.
+        </motion.p>
       </div>
     </section>
   )

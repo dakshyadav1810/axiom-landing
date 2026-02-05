@@ -13,6 +13,18 @@ import Footer from './components/Footer/Footer'
 export default function App() {
   return (
     <>
+      {/* SVG Noise Filter Definition */}
+      <svg className="noise-filter-svg" aria-hidden="true">
+        <filter id="noise-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" result="noise" />
+          <feColorMatrix type="saturate" values="0" />
+          <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
+        </filter>
+      </svg>
+      
+      {/* Global noise grain overlay */}
+      <div className="bg-noise" aria-hidden="true" />
+      
       {/* Underwater background effects */}
       <div className="bg-underwater" />
       <div className="bg-rays" />

@@ -17,7 +17,7 @@
   --border-medium: rgba(255, 255, 255, 0.1);
   --border-strong: rgba(255, 255, 255, 0.15);
   
-  --text-primary: #e8eaed;
+  --text-primary: #e8e6e1;
   --text-secondary: #7a8490;
   --text-tertiary: #4a5260;
   
@@ -30,6 +30,11 @@
   --success: #30ddbe;
   --error: #ff6b6b;
   --warning: #ffd93d;
+  
+  /* Noise texture variables */
+  --noise-opacity: 0.05;
+  --noise-opacity-strong: 0.06;
+  --noise-opacity-subtle: 0.02;
   
   /* Gradients */
   --gradient-accent: linear-gradient(135deg, #30ddbe 0%, #20b89a 100%);
@@ -123,6 +128,97 @@ body {
   height: 800px;
   background: radial-gradient(ellipse at center, rgba(48, 221, 190, 0.04) 0%, transparent 60%);
   pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== SVG Noise Filter (Global) ===== */
+.noise-filter-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ===== Global Noise Overlay ===== */
+.bg-noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Animated grain for extra texture */
+.bg-noise::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter2)'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -2%); }
+  20% { transform: translate(1%, 3%); }
+  30% { transform: translate(3%, -1%); }
+  40% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  60% { transform: translate(-1%, 1%); }
+  70% { transform: translate(3%, 3%); }
+  80% { transform: translate(-2%, -1%); }
+  90% { transform: translate(1%, 2%); }
+}
+
+/* ===== Noise Utility Classes ===== */
+.noise-texture {
+  position: relative;
+}
+
+.noise-texture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+.noise-texture-strong::after {
+  opacity: var(--noise-opacity-strong);
+}
+
+.noise-texture-subtle::after {
+  opacity: var(--noise-opacity-subtle);
+}
+
+/* Grainy gradient backgrounds */
+.grainy-gradient {
+  position: relative;
+  isolation: isolate;
+}
+
+.grainy-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: url(#noise-filter);
   z-index: -1;
 }
 

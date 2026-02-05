@@ -5,12 +5,26 @@ import './FinalCTA.css'
 export default function FinalCTA() {
   return (
     <section className="final-cta">
+      {/* Fog layers - uncertainty clearing */}
+      <div className="final-cta__fog" aria-hidden="true">
+        <div className="final-cta__fog-layer final-cta__fog-layer--1" />
+        <div className="final-cta__fog-layer final-cta__fog-layer--2" />
+        <div className="final-cta__fog-layer final-cta__fog-layer--3" />
+      </div>
+      
+      {/* Noise grain overlay */}
+      <div className="final-cta__noise" aria-hidden="true" />
+      
+      {/* Central glow - clarity emerging */}
       <div className="final-cta__glow" />
-      <div className="final-cta__rays">
+      
+      {/* Neon light rays */}
+      <div className="final-cta__rays" aria-hidden="true">
         <div className="final-cta__ray" />
         <div className="final-cta__ray" />
         <div className="final-cta__ray" />
       </div>
+      
       <div className="container">
         <motion.div 
           className="final-cta__content"
@@ -46,12 +60,15 @@ export default function FinalCTA() {
           >
             <motion.a 
               href="#" 
-              className="btn btn--primary btn--lg"
+              className="final-cta__neon-btn"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Try Axiom Free
-              <ArrowRight size={18} />
+              <span className="final-cta__neon-btn-text">
+                Try Axiom Free
+                <ArrowRight size={18} />
+              </span>
+              <span className="final-cta__neon-btn-glow" />
             </motion.a>
           </motion.div>
           <motion.p 

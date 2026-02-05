@@ -1,47 +1,34 @@
-import { Rocket, Users, Briefcase } from 'lucide-react'
+import { Rocket, Users, Briefcase, Zap, Shield, TrendingUp } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './WhoItsFor.css'
 
 const audiences = [
   {
     icon: Rocket,
-    title: 'Startups',
-    description: 'Ship faster without sacrificing quality. No QA team required—just record, run, and go.',
-    features: ['Quick setup', 'No overhead', 'Scale as you grow']
+    title: 'Solo Founders & Indie Hackers',
+    description: 'Ship with confidence even without a QA team. Catch bugs before your users do.',
+    highlight: 'Most popular',
+    size: 'large'
   },
   {
     icon: Users,
-    title: 'Product Teams',
-    description: 'Validate features without waiting for engineering. Keep your release cycle tight.',
-    features: ['No code required', 'PM-friendly', 'Fast feedback loops']
+    title: 'Small Dev Teams',
+    description: 'Validate features fast without blocking your sprint.',
+    size: 'small'
   },
   {
     icon: Briefcase,
-    title: 'Agencies',
-    description: 'Deliver client work with confidence. Prove that everything works before handoff.',
-    features: ['Client-ready reports', 'Multi-project support', 'White-label ready']
+    title: 'Agencies & Freelancers',
+    description: 'Prove to clients everything works before handoff.',
+    size: 'small'
+  },
+  {
+    icon: TrendingUp,
+    title: 'Growing Startups',
+    description: 'Scale your testing as you scale your product—without hiring dedicated QA.',
+    size: 'medium'
   }
 ]
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
-  }
-}
 
 export default function WhoItsFor() {
   return (
@@ -65,37 +52,57 @@ export default function WhoItsFor() {
           </p>
         </motion.div>
 
+        {/* Bento Grid Layout */}
         <motion.div 
-          className="who-its-for__grid grid grid--3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          className="who-its-for__bento"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
         >
           {audiences.map((audience, index) => (
             <motion.div 
               key={index} 
-              className="who-its-for__card"
-              variants={itemVariants}
+              className={`who-its-for__cell who-its-for__cell--${audience.size}`}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               whileHover={{ 
-                y: -10, 
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(48, 221, 190, 0.1)',
-                transition: { duration: 0.3 } 
+                scale: 1.02,
+                transition: { duration: 0.2 } 
               }}
             >
-              <div className="who-its-for__icon">
-                <audience.icon size={28} />
+              {audience.highlight && (
+                <span className="who-its-for__highlight">{audience.highlight}</span>
+              )}
+              
+              <div className="who-its-for__cell-icon">
+                <audience.icon size={audience.size === 'large' ? 32 : 24} />
               </div>
-              <h3 className="who-its-for__title">{audience.title}</h3>
-              <p className="who-its-for__description">{audience.description}</p>
-              <ul className="who-its-for__features">
-                {audience.features.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
+              
+              <h3 className="who-its-for__cell-title">{audience.title}</h3>
+              <p className="who-its-for__cell-description">{audience.description}</p>
+              
+              {audience.size === 'large' && (
+                <div className="who-its-for__cta">
+                  <span>Perfect for you →</span>
+                </div>
+              )}
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Social proof hint */}
+        <motion.p 
+          className="who-its-for__proof"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          Join 500+ teams shipping with confidence
+        </motion.p>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import { Check, Sparkles } from 'lucide-react'
+import { Check, Sparkles, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './Pricing.css'
 
@@ -7,10 +7,10 @@ const plans = [
     name: 'Free',
     price: '$0',
     period: 'forever',
-    description: 'Perfect for trying Axiom on a personal project.',
+    description: 'Try Axiom on a side project. No credit card required.',
     features: [
       '3 recorded tests',
-      '50 runs / month',
+      '50 test runs / month',
       'Basic reports',
       'Community support'
     ],
@@ -21,7 +21,7 @@ const plans = [
     name: 'Pro',
     price: '$29',
     period: 'per month',
-    description: 'For teams shipping regularly and needing more coverage.',
+    description: 'For indie hackers and small teams shipping regularly.',
     features: [
       'Unlimited tests',
       'Unlimited runs',
@@ -37,7 +37,7 @@ const plans = [
     name: 'Team',
     price: '$99',
     period: 'per month',
-    description: 'For growing teams that need collaboration and scale.',
+    description: 'For growing teams that need collaboration.',
     features: [
       'Everything in Pro',
       '5 team members',
@@ -46,30 +46,10 @@ const plans = [
       'Custom domains',
       'SLA guarantee'
     ],
-    cta: 'Contact Sales',
+    cta: 'Start Free Trial',
     popular: false
   }
 ]
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
-  }
-}
 
 export default function Pricing() {
   return (
@@ -85,62 +65,80 @@ export default function Pricing() {
         >
           <span className="section-header__label">Pricing</span>
           <h2 className="section-header__title">
-            Simple pricing, no surprises
+            Start free, scale when ready
           </h2>
           <p className="section-header__description">
-            Start free. Upgrade when you need more power.
+            No credit card required. Upgrade as your testing needs grow.
           </p>
         </motion.div>
 
         <motion.div 
           className="pricing__grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
         >
           {plans.map((plan, index) => (
             <motion.div 
               key={index} 
-              className={`pricing__card ${plan.popular ? 'popular' : ''}`}
-              variants={itemVariants}
+              className={`pricing__card ${plan.popular ? 'pricing__card--popular' : ''}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 } 
+                y: -8,
+                transition: { duration: 0.2 } 
               }}
             >
               {plan.popular && (
                 <div className="pricing__badge">
-                  <Sparkles size={14} />
-                  Most Popular
+                  <Sparkles size={12} />
+                  <span>Most Popular</span>
                 </div>
               )}
+              
               <div className="pricing__header">
                 <h3 className="pricing__name">{plan.name}</h3>
-                <div className="pricing__price">
-                  {plan.price}
-                  <span>/{plan.period}</span>
+                <div className="pricing__price-row">
+                  <span className="pricing__price">{plan.price}</span>
+                  <span className="pricing__period">/{plan.period}</span>
                 </div>
                 <p className="pricing__description">{plan.description}</p>
               </div>
+              
               <ul className="pricing__features">
                 {plan.features.map((feature, i) => (
                   <li key={i}>
-                    <Check size={18} />
-                    {feature}
+                    <Check size={16} />
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
+              
               <motion.button 
-                className={`pricing__cta ${plan.popular ? 'btn btn--primary' : 'btn btn--secondary'}`}
+                className={`pricing__cta ${plan.popular ? 'pricing__cta--primary' : ''}`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {plan.cta}
+                <span>{plan.cta}</span>
+                <ArrowRight size={16} />
               </motion.button>
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Trust indicator */}
+        <motion.p 
+          className="pricing__trust"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          14-day free trial on all paid plans • Cancel anytime
+        </motion.p>
       </div>
     </section>
   )

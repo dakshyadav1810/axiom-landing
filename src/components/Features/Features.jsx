@@ -1,42 +1,42 @@
-import { 
-  Video, 
-  Target, 
-  Zap, 
-  FileText, 
-  Lightbulb,
-  Repeat
-} from 'lucide-react'
 import { motion } from 'framer-motion'
+import {
+  FlowRecordingSVG,
+  ElementResolutionSVG,
+  ChaosTestingSVG,
+  TestReportsSVG,
+  FixSuggestionsSVG,
+  ScheduledRunsSVG
+} from './FeatureSVGs'
 import './Features.css'
 
 const features = [
   {
-    icon: Video,
+    SVG: FlowRecordingSVG,
     title: 'Manual flow recording',
     description: 'Record user journeys by clicking through your app. No code, no selectors, no configuration.'
   },
   {
-    icon: Target,
+    SVG: ElementResolutionSVG,
     title: 'Smart element resolution',
     description: 'Axiom finds elements intelligently, even when IDs change or DOM structure shifts.'
   },
   {
-    icon: Zap,
+    SVG: ChaosTestingSVG,
     title: 'Chaos testing profiles',
     description: 'Simulate slow networks, mobile viewports, and edge conditions automatically.'
   },
   {
-    icon: FileText,
+    SVG: TestReportsSVG,
     title: 'Clear test reports',
     description: 'Every run produces a detailed report with screenshots, timings, and failure context.'
   },
   {
-    icon: Lightbulb,
+    SVG: FixSuggestionsSVG,
     title: 'Actionable fix suggestions',
     description: 'When tests fail, get specific, copyable suggestions to resolve the issue.'
   },
   {
-    icon: Repeat,
+    SVG: ScheduledRunsSVG,
     title: 'Scheduled test runs',
     description: 'Run tests on a schedule or trigger them from CI. Always know your app is working.'
   }
@@ -47,24 +47,28 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.15
     }
   }
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
   }
 }
 
 export default function Features() {
   return (
     <section id="features" className="features">
-      <div className="features__glow" />
+      {/* Background effects */}
+      <div className="features__bg" aria-hidden="true">
+        <div className="features__grid-lines" />
+      </div>
+      
       <div className="container">
         <motion.div 
           className="section-header"
@@ -83,7 +87,7 @@ export default function Features() {
         </motion.div>
 
         <motion.div 
-          className="features__grid grid grid--3"
+          className="features__grid"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -92,19 +96,23 @@ export default function Features() {
           {features.map((feature, index) => (
             <motion.div 
               key={index} 
-              className="features__card card"
+              className="features__card"
               variants={itemVariants}
               whileHover={{ 
-                y: -8, 
-                borderColor: 'rgba(48, 221, 190, 0.3)',
+                y: -6,
                 transition: { duration: 0.3 } 
               }}
             >
-              <div className="features__icon">
-                <feature.icon size={22} />
+              {/* SVG Visual */}
+              <div className="features__visual">
+                <feature.SVG />
               </div>
-              <h3 className="features__title">{feature.title}</h3>
-              <p className="features__description">{feature.description}</p>
+              
+              {/* Content */}
+              <div className="features__content">
+                <h3 className="features__title">{feature.title}</h3>
+                <p className="features__description">{feature.description}</p>
+              </div>
             </motion.div>
           ))}
         </motion.div>

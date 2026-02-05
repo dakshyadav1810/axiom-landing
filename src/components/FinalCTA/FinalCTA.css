@@ -1,6 +1,6 @@
 .final-cta {
   position: relative;
-  padding: 160px 0;
+  padding: 180px 0;
   overflow: hidden;
 }
 
@@ -14,17 +14,99 @@
   background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
 }
 
+/* ===== Fog Layers - Uncertainty Clearing ===== */
+.final-cta__fog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.final-cta__fog-layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat;
+  opacity: 0.4;
+}
+
+.final-cta__fog-layer--1 {
+  top: 0;
+  left: -50%;
+  background: 
+    radial-gradient(ellipse 40% 30% at 20% 50%, rgba(48, 221, 190, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 60%);
+  animation: fog-drift-1 25s ease-in-out infinite;
+}
+
+.final-cta__fog-layer--2 {
+  top: 0;
+  left: -30%;
+  background: 
+    radial-gradient(ellipse 60% 50% at 50% 60%, rgba(48, 221, 190, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 25% at 70% 40%, rgba(48, 221, 190, 0.04) 0%, transparent 50%);
+  animation: fog-drift-2 30s ease-in-out infinite;
+}
+
+.final-cta__fog-layer--3 {
+  top: 0;
+  left: -20%;
+  background: 
+    radial-gradient(ellipse 45% 35% at 30% 70%, rgba(56, 189, 248, 0.025) 0%, transparent 60%);
+  animation: fog-drift-3 20s ease-in-out infinite;
+}
+
+@keyframes fog-drift-1 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(5%) translateY(-3%); }
+}
+
+@keyframes fog-drift-2 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-3%) translateY(2%); }
+}
+
+@keyframes fog-drift-3 {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(4%) translateY(3%); }
+}
+
+/* Noise grain on fog */
+.final-cta__noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Central clarity glow - where confidence lives */
 .final-cta__glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
+  width: 600px;
   height: 400px;
-  background: radial-gradient(ellipse at center, rgba(48, 221, 190, 0.12) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(48, 221, 190, 0.15) 0%, rgba(48, 221, 190, 0.05) 40%, transparent 70%);
   pointer-events: none;
+  filter: blur(40px);
+  animation: glow-pulse 4s ease-in-out infinite;
 }
 
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Neon light rays cutting through fog */
 .final-cta__rays {
   position: absolute;
   top: 0;
@@ -38,28 +120,42 @@
 
 .final-cta__ray {
   position: absolute;
-  top: -100px;
-  width: 2px;
-  height: 300px;
-  background: linear-gradient(180deg, rgba(48, 221, 190, 0.3) 0%, transparent 100%);
-  opacity: 0.3;
+  top: -50px;
+  width: 3px;
+  height: 250px;
+  background: linear-gradient(180deg, rgba(48, 221, 190, 0.5) 0%, rgba(48, 221, 190, 0.1) 50%, transparent 100%);
+  filter: blur(2px);
+  opacity: 0;
+  animation: ray-flicker 3s ease-in-out infinite;
 }
 
 .final-cta__ray:nth-child(1) {
-  left: 30%;
-  transform: rotate(-10deg);
+  left: 35%;
+  transform: rotate(-8deg);
+  animation-delay: 0s;
 }
 
 .final-cta__ray:nth-child(2) {
   left: 50%;
   transform: translateX(-50%);
+  animation-delay: 1s;
 }
 
 .final-cta__ray:nth-child(3) {
-  left: 70%;
-  transform: rotate(10deg);
+  left: 65%;
+  transform: rotate(8deg);
+  animation-delay: 2s;
 }
 
+@keyframes ray-flicker {
+  0%, 100% { opacity: 0; }
+  20% { opacity: 0.3; }
+  25% { opacity: 0.1; }
+  30% { opacity: 0.4; }
+  80% { opacity: 0.2; }
+}
+
+/* ===== Content ===== */
 .final-cta__content {
   max-width: 700px;
   margin: 0 auto;
@@ -70,10 +166,10 @@
 
 .final-cta__title {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.1;
   margin-bottom: 20px;
-  background: linear-gradient(180deg, var(--text-primary) 0%, rgba(255, 255, 255, 0.7) 100%);
+  background: linear-gradient(180deg, var(--text-primary) 0%, rgba(232, 230, 225, 0.75) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,7 +178,7 @@
 .final-cta__description {
   font-size: 1.25rem;
   color: var(--text-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .final-cta__actions {
@@ -92,9 +188,94 @@
   margin-bottom: 32px;
 }
 
-.final-cta__actions .btn--lg {
-  padding: 18px 40px;
+/* ===== Neon Button ===== */
+.final-cta__neon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 44px;
+  font-family: var(--font-sans);
   font-size: 1.0625rem;
+  font-weight: 600;
+  color: #0a0a0a;
+  background: var(--gradient-accent);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-decoration: none;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.final-cta__neon-btn-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Neon glow effect */
+.final-cta__neon-btn-glow {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-full);
+  filter: blur(16px);
+  opacity: 0.5;
+  z-index: -1;
+  transition: all 0.3s ease;
+  animation: neon-breathe 2s ease-in-out infinite;
+}
+
+@keyframes neon-breathe {
+  0%, 100% { opacity: 0.4; filter: blur(16px); }
+  50% { opacity: 0.6; filter: blur(20px); }
+}
+
+.final-cta__neon-btn:hover .final-cta__neon-btn-glow {
+  opacity: 0.8;
+  filter: blur(24px);
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+}
+
+.final-cta__neon-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Button noise texture */
+.final-cta__neon-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Top highlight */
+.final-cta__neon-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: var(--radius-full) var(--radius-full) 50% 50%;
+  pointer-events: none;
 }
 
 .final-cta__note {

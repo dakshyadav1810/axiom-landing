@@ -5,6 +5,10 @@ import './Hero.css'
 export default function Hero() {
   return (
     <section className="hero">
+      {/* Grainy atmospheric depth layers */}
+      <div className="hero__noise-layer" aria-hidden="true" />
+      <div className="hero__particles" aria-hidden="true" />
+      
       {/* Underwater caustic light effect */}
       <div className="hero__caustics">
         <div className="hero__light-cone" />
@@ -13,6 +17,7 @@ export default function Hero() {
       </div>
       
       <div className="hero__glow-orb" />
+      <div className="hero__vignette" aria-hidden="true" />
       
       <div className="container hero__container">
         <motion.div 
