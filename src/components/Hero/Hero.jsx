@@ -45,8 +45,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom tests real user flows under real-world conditions, without
-          the overhead of traditional QA.
+          Record a user flow once. Run it automatically before every deploy. Stop manually clicking through the same screens like it's 2015.
         </motion.p>
 
         <motion.div

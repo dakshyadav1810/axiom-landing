@@ -7,52 +7,52 @@ const steps = [
   {
     number: '01',
     icon: Link,
-    title: 'Connect your app',
-    description: 'Point Axiom at any deployed URL. No SDKs, no code changes, no infrastructure to manage.',
-    detail: 'Works with any web app—React, Vue, Next.js, or plain HTML. Just paste your URL and go.'
+    title: 'Paste your URL',
+    description: 'That\'s literally it. No SDK, no code snippet, no 47-step integration guide. Just your URL.',
+    detail: 'React, Vue, Next.js, plain HTML. We don\'t care what you\'re running. If it\'s on the web, we can test it.'
   },
   {
     number: '02',
     icon: MousePointer,
-    title: 'Record the flow',
-    description: 'Walk through the user journey once. Axiom captures every interaction and builds a replayable test.',
-    detail: 'Click through signup, checkout, or any critical path. Axiom watches and learns.'
+    title: 'Click through it once',
+    description: 'You already do this manually before every deploy. This time, we\'re watching.',
+    detail: 'Walk through signup, checkout, whatever matters. We record every click, every input, every step.'
   },
   {
     number: '03',
     icon: Play,
-    title: 'Run and review',
-    description: 'Execute tests on demand or on a schedule. Get clear pass/fail results with actionable fixes.',
-    detail: 'Run before every deploy, or set up automated checks. Know your app works.'
+    title: 'Never do it again',
+    description: 'That flow you just recorded? It runs automatically now. Before every deploy. Forever.',
+    detail: 'Something breaks? You\'ll know immediately. With screenshots, context, and suggestions for what went wrong.'
   }
 ]
 
 export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0)
-  
+
   return (
     <section id="how-it-works" className="how-it-works">
       <div className="how-it-works__glow" />
-      
+
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-header__label">How It Works</span>
+          <span className="section-header__label">How it works</span>
           <h2 className="section-header__title">
-            Three steps to confidence
+            Three steps. Five minutes. Done.
           </h2>
           <p className="section-header__description">
-            No complex setup. No test code to maintain. Just record, run, and ship.
+            If you can click through your app, you can use Axiom. There's no learning curve because there's nothing to learn.
           </p>
         </motion.div>
 
         {/* Stepper Navigation */}
-        <motion.div 
+        <motion.div
           className="how-it-works__stepper"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,12 +61,12 @@ export default function HowItWorks() {
         >
           {/* Progress bar */}
           <div className="how-it-works__progress">
-            <div 
+            <div
               className="how-it-works__progress-fill"
               style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
             />
           </div>
-          
+
           {/* Step tabs */}
           <div className="how-it-works__tabs">
             {steps.map((step, index) => (
@@ -100,7 +100,7 @@ export default function HowItWorks() {
                   return <IconComponent size={32} />
                 })()}
               </div>
-              
+
               {/* Text */}
               <div className="how-it-works__text">
                 <h3 className="how-it-works__panel-title">
@@ -113,7 +113,7 @@ export default function HowItWorks() {
                   {steps[activeStep].detail}
                 </p>
               </div>
-              
+
               {/* Visual illustration */}
               <div className="how-it-works__visual">
                 {activeStep === 0 && <ConnectVisual />}
@@ -123,17 +123,17 @@ export default function HowItWorks() {
             </motion.div>
           </AnimatePresence>
         </div>
-        
+
         {/* Navigation arrows */}
         <div className="how-it-works__nav">
-          <button 
+          <button
             className="how-it-works__nav-btn"
             onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
             disabled={activeStep === 0}
           >
             ← Previous
           </button>
-          <button 
+          <button
             className="how-it-works__nav-btn how-it-works__nav-btn--primary"
             onClick={() => setActiveStep(prev => Math.min(steps.length - 1, prev + 1))}
             disabled={activeStep === steps.length - 1}
@@ -157,19 +157,19 @@ function ConnectVisual() {
       <circle cx="62" cy="30" r="4" fill="rgba(40, 200, 64, 0.6)" />
       <rect x="80" y="26" width="90" height="8" rx="4" fill="rgba(48, 221, 190, 0.1)" />
       <text x="85" y="33" fill="rgba(48, 221, 190, 0.8)" fontSize="6" fontFamily="monospace">yourapp.com</text>
-      <motion.path 
-        d="M100 70 L100 100 L140 100" 
-        stroke="rgba(48, 221, 190, 0.5)" 
-        strokeWidth="1.5" 
+      <motion.path
+        d="M100 70 L100 100 L140 100"
+        stroke="rgba(48, 221, 190, 0.5)"
+        strokeWidth="1.5"
         strokeDasharray="4 4"
         fill="none"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 1, delay: 0.3 }}
       />
-      <motion.circle 
-        cx="145" cy="100" r="6" 
-        fill="rgba(48, 221, 190, 0.2)" 
+      <motion.circle
+        cx="145" cy="100" r="6"
+        fill="rgba(48, 221, 190, 0.2)"
         stroke="rgba(48, 221, 190, 0.8)"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -193,8 +193,8 @@ function RecordVisual() {
       >
         <path d="M55 38 L55 52 L62 47 L67 55 L70 53 L65 45 L72 45 Z" fill="rgba(48, 221, 190, 0.9)" />
       </motion.g>
-      <motion.circle 
-        cx="170" cy="30" r="8" 
+      <motion.circle
+        cx="170" cy="30" r="8"
         fill="rgba(255, 107, 107, 0.8)"
         initial={{ opacity: 0.5 }}
         animate={{ opacity: [0.5, 1, 0.5] }}

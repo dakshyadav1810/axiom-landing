@@ -3,40 +3,39 @@ import { motion } from 'framer-motion'
 import './Solution.css'
 
 const beforeItems = [
-  { text: 'Manual testing before every deploy' },
-  { text: 'Brittle scripts that break constantly' },
-  { text: 'Bugs discovered by users' }
+  { text: 'Clicking through the same flows before every deploy' },
+  { text: 'Tests that break the moment the DOM changes' },
+  { text: 'Finding out something is broken from a user complaint' }
 ]
 
 const afterItems = [
-  { text: 'Recorded flows run automatically' },
-  { text: 'Self-healing tests that adapt' },
-  { text: 'Issues caught before shipping' }
+  { text: 'Record once, run forever' },
+  { text: 'Tests that survive your UI changes' },
+  { text: 'Problems caught before anyone notices' }
 ]
 
 export default function Solution() {
   return (
     <section className="solution">
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-header__label">The Solution</span>
+          <span className="section-header__label">There's a better way</span>
           <h2 className="section-header__title">
-            From chaos to confidence
+            What if testing just worked?
           </h2>
           <p className="section-header__description">
-            Axiom eliminates the friction of testing so you can ship faster, 
-            with fewer surprises.
+            You know what testing should feel like. You record a flow once, and it runs every time you deploy. No babysitting. No rewriting. No drama.
           </p>
         </motion.div>
 
         {/* Before → After Split Panel */}
-        <motion.div 
+        <motion.div
           className="solution__split"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +51,7 @@ export default function Solution() {
             </div>
             <ul className="solution__list">
               {beforeItems.map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   className="solution__item solution__item--before"
                   initial={{ opacity: 0, x: -20 }}
@@ -86,7 +85,7 @@ export default function Solution() {
             </div>
             <ul className="solution__list">
               {afterItems.map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   className="solution__item solution__item--after"
                   initial={{ opacity: 0, x: 20 }}
@@ -105,14 +104,14 @@ export default function Solution() {
         </motion.div>
 
         {/* Bottom summary */}
-        <motion.p 
+        <motion.p
           className="solution__summary"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          No test scripts. No QA expertise. Just record, run, and ship.
+          You already know how to click through your app. That's all you need.
         </motion.p>
       </div>
     </section>

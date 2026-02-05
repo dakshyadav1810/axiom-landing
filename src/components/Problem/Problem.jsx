@@ -96,14 +96,14 @@ export default function Problem() {
                 <p className="problem__description">{problem.description}</p>
               </div>
 
-              {/* Domino falling indicator */}
+              {/* Domino falling indicator
               {index < problems.length - 1 && (
                 <div className="problem__arrow" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 5v14M5 12l7 7 7-7" />
                   </svg>
                 </div>
-              )}
+              )} */}
             </motion.div>
           ))}
         </div>
