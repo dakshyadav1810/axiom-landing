@@ -1,11 +1,12 @@
 import { ArrowRight, Play } from 'lucide-react'
 import { motion } from 'framer-motion'
 import PerlinBackground from '../PerlinBackground/PerlinBackground'
+import WaitlistForm from '../WaitlistForm/WaitlistForm'
 import './Hero.css'
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" id="hero">
       {/* Perlin noise flowing lines from center */}
       <PerlinBackground
         lineCount={150}
@@ -65,24 +66,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <motion.a
-            href="#start"
-            className="btn btn--primary"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Run your first test
-            <ArrowRight size={18} />
-          </motion.a>
-          <motion.a
-            href="#demo"
-            className="btn btn--secondary"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <Play size={16} />
-            See how it works
-          </motion.a>
+          <WaitlistForm />
         </motion.div>
 
         <div className="hero__preview">

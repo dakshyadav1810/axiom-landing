@@ -37,12 +37,17 @@ export default function Navbar() {
         <div className="navbar__actions">
           <a href="#login" className="btn btn--ghost">Log in</a>
           <motion.a
-            href="#signup"
+            href="#hero"
             className="btn btn--primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })
+              window.dispatchEvent(new CustomEvent('focus-waitlist'))
+            }}
           >
-            Get Started
+            Join Waitlist
           </motion.a>
         </div>
 
