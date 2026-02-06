@@ -9,7 +9,7 @@ const steps = [
     icon: Link,
     title: 'Connect your app',
     description: 'Point Axiom at any deployed URL. No SDKs, no code changes, no infrastructure to manage.',
-    detail: 'Works with any web app—React, Vue, Next.js, or plain HTML. Just paste your URL.'
+    detail: 'Works with any web app: React, Vue, Next.js, or plain HTML. Just paste your URL.'
   },
   {
     number: '02',
@@ -94,7 +94,7 @@ export default function HowItWorks() {
               ))}
             </div>
 
-            {/* Right: Content panel */}
+            {/* Center: Content panel */}
             <div className="how-it-works__content">
               {steps.map((step, index) => (
                 <motion.div
@@ -117,15 +117,15 @@ export default function HowItWorks() {
                   <h3 className="how-it-works__panel-title">{step.title}</h3>
                   <p className="how-it-works__panel-description">{step.description}</p>
                   <p className="how-it-works__panel-detail">{step.detail}</p>
-
-                  {/* Visual */}
-                  <div className="how-it-works__visual">
-                    {index === 0 && <ConnectVisual active={activeStep === 0} />}
-                    {index === 1 && <RecordVisual active={activeStep === 1} />}
-                    {index === 2 && <RunVisual active={activeStep === 2} />}
-                  </div>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Right: Large Visual illustration */}
+            <div className="how-it-works__visual">
+              {activeStep === 0 && <ConnectVisual active={true} />}
+              {activeStep === 1 && <RecordVisual active={true} />}
+              {activeStep === 2 && <RunVisual active={true} />}
             </div>
           </div>
 

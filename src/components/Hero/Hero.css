@@ -15,36 +15,27 @@
   bottom: 0;
   pointer-events: none;
   z-index: 1;
+  transform: translateY(81px);
 }
 
 /* Left margin line */
 .hero__margin-lines::before {
   content: '';
   position: absolute;
-  top: 0;
   left: calc((100% - var(--container-max)) / 2 + 24px);
   width: 1px;
   height: 100%;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      var(--line-color) 10%,
-      var(--line-color) 90%,
-      transparent 100%);
+  background: var(--line-color);
 }
 
 /* Right margin line */
 .hero__margin-lines::after {
   content: '';
   position: absolute;
-  top: 0;
   right: calc((100% - var(--container-max)) / 2 + 24px);
   width: 1px;
   height: 100%;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      var(--line-color) 10%,
-      var(--line-color) 90%,
-      transparent 100%);
+  background: var(--line-color);
 }
 
 /* ===== Grainy Atmospheric Depth Effect ===== */
@@ -296,6 +287,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 500;
+  font-size: 82px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 50%, var(--accent) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;

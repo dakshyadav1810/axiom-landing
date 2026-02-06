@@ -25,7 +25,7 @@ const audiences = [
   {
     icon: TrendingUp,
     title: 'Growing Startups',
-    description: 'Scale your testing as you scale your product—without hiring dedicated QA.',
+    description: 'Scale your testing as you scale your product, without hiring dedicated QA.',
     size: 'medium'
   }
 ]
@@ -35,7 +35,7 @@ export default function WhoItsFor() {
     <section id="who-its-for" className="who-its-for">
       <div className="who-its-for__glow" />
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,13 +47,13 @@ export default function WhoItsFor() {
             Built for teams that move fast
           </h2>
           <p className="section-header__description">
-            Whether you're a solo founder or a growing product team, 
+            Whether you're a solo founder or a growing product team,
             Axiom fits into the way you already work.
           </p>
         </motion.div>
 
         {/* Bento Grid Layout */}
-        <motion.div 
+        <motion.div
           className="who-its-for__bento"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,29 +61,29 @@ export default function WhoItsFor() {
           transition={{ duration: 0.6 }}
         >
           {audiences.map((audience, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               className={`who-its-for__cell who-its-for__cell--${audience.size}`}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.02,
-                transition: { duration: 0.2 } 
+                transition: { duration: 0.2 }
               }}
             >
               {audience.highlight && (
                 <span className="who-its-for__highlight">{audience.highlight}</span>
               )}
-              
+
               <div className="who-its-for__cell-icon">
                 <audience.icon size={audience.size === 'large' ? 32 : 24} />
               </div>
-              
+
               <h3 className="who-its-for__cell-title">{audience.title}</h3>
               <p className="who-its-for__cell-description">{audience.description}</p>
-              
+
               {audience.size === 'large' && (
                 <div className="who-its-for__cta">
                   <span>Perfect for you →</span>
@@ -94,7 +94,7 @@ export default function WhoItsFor() {
         </motion.div>
 
         {/* Social proof hint */}
-        <motion.p 
+        <motion.p
           className="who-its-for__proof"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

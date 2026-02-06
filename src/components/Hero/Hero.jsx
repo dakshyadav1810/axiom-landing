@@ -29,9 +29,6 @@ export default function Hero() {
       <div className="hero__glow-orb" />
       <div className="hero__vignette" aria-hidden="true" />
 
-      {/* Architectural margin lines */}
-      <div className="hero__margin-lines" aria-hidden="true" />
-
       <div className="container hero__container">
         <motion.div
           className="hero__badge"
@@ -58,7 +55,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom tests real user flows under real-world conditions,without
+          Axiom tests real user flows in modern web apps under real-world conditions, without
           the overhead of traditional QA.
         </motion.p>
 

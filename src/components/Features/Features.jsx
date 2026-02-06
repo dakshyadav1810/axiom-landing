@@ -54,8 +54,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
   }
@@ -68,9 +68,9 @@ export default function Features() {
       <div className="features__bg" aria-hidden="true">
         <div className="features__grid-lines" />
       </div>
-      
+
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,11 +82,11 @@ export default function Features() {
             Built for how you actually work
           </h2>
           <p className="section-header__description">
-            Everything you need to test with confidence—nothing you don't.
+            Everything you need to test with confidence. Nothing you don't.
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="features__grid"
           variants={containerVariants}
           initial="hidden"
@@ -94,20 +94,20 @@ export default function Features() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {features.map((feature, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               className="features__card"
               variants={itemVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -6,
-                transition: { duration: 0.3 } 
+                transition: { duration: 0.3 }
               }}
             >
               {/* SVG Visual */}
               <div className="features__visual">
                 <feature.SVG />
               </div>
-              
+
               {/* Content */}
               <div className="features__content">
                 <h3 className="features__title">{feature.title}</h3>

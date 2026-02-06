@@ -1,17 +1,16 @@
 .how-it-works {
   position: relative;
-  /* Height determines scroll distance for all 3 steps */
   height: 300vh;
 }
 
-/* Sticky container - stays fixed while scrolling */
+/* Sticky container */
 .how-it-works__sticky {
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 80px 0;
+  flex-direction: column;
+  padding: 0;
 }
 
 /* Background glow */
@@ -20,19 +19,27 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   background: radial-gradient(circle, rgba(48, 221, 190, 0.03) 0%, transparent 70%);
   pointer-events: none;
 }
 
-/* ===== Main Layout ===== */
+/* Header - compact at top */
+.how-it-works .section-header {
+  padding-top: 100px;
+  padding-bottom: 40px;
+  flex-shrink: 0;
+}
+
+/* ===== Main Layout - Side by side, fills remaining space ===== */
 .how-it-works__main {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 60px;
-  margin-top: 40px;
-  align-items: start;
+  grid-template-columns: 220px 1fr 1fr;
+  gap: 40px;
+  flex: 1;
+  align-items: center;
+  padding-bottom: 60px;
 }
 
 /* ===== Step Indicators (Left) ===== */
@@ -45,8 +52,8 @@
 .how-it-works__step {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding: 24px 0;
+  gap: 14px;
+  padding: 20px 0;
   opacity: 0.35;
   transition: opacity 0.4s ease;
 }
@@ -59,10 +66,9 @@
   opacity: 0.6;
 }
 
-/* Step indicator with progress bar */
 .how-it-works__step-indicator {
   position: relative;
-  width: 32px;
+  width: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,12 +79,11 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--accent);
-  padding: 6px 0;
+  padding: 4px 0;
   position: relative;
   z-index: 2;
 }
 
-/* Vertical progress line */
 .how-it-works__step-indicator::after {
   content: '';
   position: absolute;
@@ -86,7 +91,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 1px;
-  height: 48px;
+  height: 40px;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -94,14 +99,13 @@
   display: none;
 }
 
-/* Progress fill */
 .how-it-works__step-progress {
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
   width: 1px;
-  height: 48px;
+  height: 40px;
   background: var(--accent);
   transform-origin: top;
   z-index: 1;
@@ -109,7 +113,7 @@
 
 .how-it-works__step-label {
   flex: 1;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
 .how-it-works__step-title {
@@ -123,17 +127,20 @@
   color: var(--accent);
 }
 
-/* ===== Content Panel (Right) ===== */
+/* ===== Content Panel (Center) ===== */
 .how-it-works__content {
   position: relative;
-  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .how-it-works__panel {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   right: 0;
+  transform: translateY(-50%);
 }
 
 .how-it-works__icon {
@@ -146,14 +153,14 @@
   border: 1px solid rgba(48, 221, 190, 0.15);
   border-radius: var(--radius-md);
   color: var(--accent);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .how-it-works__panel-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
   color: var(--text-primary);
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 }
 
 .how-it-works__panel-description {
@@ -161,101 +168,141 @@
   line-height: 1.7;
   color: var(--text-secondary);
   margin: 0 0 8px;
-  max-width: 480px;
 }
 
 .how-it-works__panel-detail {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-tertiary);
-  margin: 0 0 32px;
-  max-width: 440px;
+  margin: 0;
 }
 
-/* Visual illustration */
+/* ===== Visual (Right - Large!) ===== */
 .how-it-works__visual {
-  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .how-it-works__svg {
   width: 100%;
-  max-width: 360px;
+  max-width: 400px;
   height: auto;
+  min-height: 200px;
 }
 
 /* ===== Scroll Hint ===== */
 .how-it-works__scroll-hint {
   position: absolute;
-  bottom: 40px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
+  gap: 6px;
+  font-size: 0.6875rem;
   color: var(--text-tertiary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .how-it-works__scroll-arrow {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: var(--accent);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 900px) {
+/* ===== Responsive - Tablet ===== */
+@media (max-width: 1024px) {
   .how-it-works__main {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
   }
 
-  .how-it-works__steps {
-    flex-direction: row;
-    justify-content: center;
-    gap: 24px;
-  }
-
-  .how-it-works__step {
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    text-align: center;
-  }
-
-  .how-it-works__step-indicator::after {
+  .how-it-works__visual {
     display: none;
   }
 
-  .how-it-works__step-progress {
+  .how-it-works__scroll-hint {
     display: none;
   }
 }
 
+/* ===== Responsive - Mobile ===== */
 @media (max-width: 640px) {
   .how-it-works {
-    height: 250vh;
+    height: auto;
+  }
+
+  .how-it-works .section-header {
+    padding-top: 60px;
+    padding-bottom: 24px;
   }
 
   .how-it-works__sticky {
-    padding: 60px 0;
+    position: relative;
+    height: auto;
+    padding: 0 0 60px;
+  }
+
+  .how-it-works__main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .how-it-works__steps {
+    display: none;
   }
 
   .how-it-works__content {
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .how-it-works__panel {
+    position: relative !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 32px;
+  }
+
+  .how-it-works__panel:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .how-it-works__icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px;
   }
 
   .how-it-works__panel-title {
     font-size: 1.25rem;
+    margin-bottom: 8px;
   }
 
   .how-it-works__panel-description {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    margin-bottom: 4px;
+  }
+
+  .how-it-works__panel-detail {
+    font-size: 0.875rem;
+  }
+
+  .how-it-works__visual {
+    display: none;
   }
 
   .how-it-works__scroll-hint {
-    bottom: 20px;
+    display: none;
   }
 }

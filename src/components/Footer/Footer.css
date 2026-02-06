@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  padding: 80px 0 40px;
+  padding: 80px 40px 40px;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -60,7 +60,6 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 32px;
-  border-top: 1px solid var(--border-subtle);
 }
 
 .footer__copyright {

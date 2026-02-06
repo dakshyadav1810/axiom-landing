@@ -12,7 +12,7 @@ const riskFactors = [
   {
     threshold: 0.5,
     label: "Tech debt mounting",
-    description: "\"We'll add tests later\" — said 6 months ago.",
+    description: "\"We'll add tests later\" ...that was 6 months ago.",
     severity: "MEDIUM"
   },
   {
@@ -32,30 +32,31 @@ export default function Problem() {
     offset: ["start end", "end start"]
   })
 
-  // Transform scroll progress to risk level (0-100)
-  const riskLevel = useTransform(scrollYProgress, [0.1, 0.7], [0, 100])
-  const [currentRisk, setCurrentRisk] = useState(0)
+  // Transform scroll progress to risk level (100 → 0, starts high, decreases)
+  const riskLevel = useTransform(scrollYProgress, [0.1, 0.7], [100, 0])
+  const [currentRisk, setCurrentRisk] = useState(100)
 
   useEffect(() => {
     const unsubscribe = riskLevel.on("change", (value) => {
       setCurrentRisk(Math.round(Math.max(0, Math.min(100, value))))
 
-      // Update active factors based on risk level
-      const active = riskFactors.filter(f => (value / 100) >= f.threshold)
+      // Update active factors - show when risk passes their threshold (descending)
+      const normalizedRisk = value / 100
+      const active = riskFactors.filter(f => normalizedRisk >= (1 - f.threshold))
       setActiveFactors(active.map(f => f.label))
     })
     return () => unsubscribe()
   }, [riskLevel])
 
-  // Calculate gauge rotation (from -90deg to 90deg)
-  const gaugeRotation = useTransform(scrollYProgress, [0.1, 0.7], [-90, 90])
+  // Calculate gauge rotation (from 90deg to -90deg, starts full)
+  const gaugeRotation = useTransform(scrollYProgress, [0.1, 0.7], [90, -90])
 
-  // Risk status text - muted colors
+  // Risk status text - muted colors (reversed: high at start)
   const getRiskStatus = () => {
-    if (currentRisk < 25) return { text: "LOW", color: "var(--accent)" }
-    if (currentRisk < 50) return { text: "MODERATE", color: "var(--text-secondary)" }
-    if (currentRisk < 75) return { text: "HIGH", color: "rgba(255, 160, 140, 0.9)" }
-    return { text: "EXTREME", color: "rgba(255, 130, 130, 0.95)" }
+    if (currentRisk > 75) return { text: "EXTREME", color: "rgba(255, 130, 130, 0.95)" }
+    if (currentRisk > 50) return { text: "HIGH", color: "rgba(255, 160, 140, 0.9)" }
+    if (currentRisk > 25) return { text: "MODERATE", color: "var(--text-secondary)" }
+    return { text: "LOW", color: "var(--accent)" }
   }
 
   const status = getRiskStatus()
@@ -70,10 +71,13 @@ export default function Problem() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-header__label">Be honest</span>
+          <span className="section-header__label">The Reality</span>
           <h2 className="section-header__title">
-            You don't test. We know.
+            Most teams skip testing.
           </h2>
+          <p className="section-header__description">
+            The cracks show up later.
+          </p>
         </motion.div>
 
         {/* Risk Meter Visualization */}
@@ -105,8 +109,8 @@ export default function Problem() {
                 stroke="url(#gaugeGradient)"
                 strokeWidth="12"
                 strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                style={{ pathLength: useTransform(scrollYProgress, [0.1, 0.7], [0, 1]) }}
+                initial={{ pathLength: 1 }}
+                style={{ pathLength: useTransform(scrollYProgress, [0.1, 0.7], [1, 0]) }}
               />
               {/* Tick marks */}
               {[0, 25, 50, 75, 100].map((tick, i) => {

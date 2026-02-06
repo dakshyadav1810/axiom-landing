@@ -1,14 +1,24 @@
 import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './Navbar.css'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <motion.nav 
-      className="navbar"
+    <motion.nav
+      className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
@@ -19,16 +29,15 @@ export default function Navbar() {
         </a>
 
         <div className={`navbar__links ${isOpen ? 'navbar__links--open' : ''}`}>
-          <a href="#features">Features</a>
           <a href="#how-it-works">How it works</a>
+          <a href="#features">Features</a>
           <a href="#pricing">Pricing</a>
-          <a href="#docs">Docs</a>
         </div>
 
         <div className="navbar__actions">
           <a href="#login" className="btn btn--ghost">Log in</a>
-          <motion.a 
-            href="#signup" 
+          <motion.a
+            href="#signup"
             className="btn btn--primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -37,7 +46,7 @@ export default function Navbar() {
           </motion.a>
         </div>
 
-        <button 
+        <button
           className="navbar__toggle"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"

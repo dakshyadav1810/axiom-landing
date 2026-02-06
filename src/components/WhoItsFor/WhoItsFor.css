@@ -1,6 +1,9 @@
 .who-its-for {
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .who-its-for::before {
@@ -45,6 +48,9 @@
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .who-its-for__cell:hover {
@@ -169,12 +175,12 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
   }
-  
+
   .who-its-for__cell--large {
     grid-column: span 2;
     grid-row: span 1;
   }
-  
+
   .who-its-for__cell--medium {
     grid-column: span 2;
   }
@@ -184,12 +190,12 @@
   .who-its-for__bento {
     grid-template-columns: 1fr;
   }
-  
+
   .who-its-for__cell--large,
   .who-its-for__cell--medium {
     grid-column: span 1;
   }
-  
+
   .who-its-for__cell {
     padding: 24px;
   }
