@@ -12,33 +12,33 @@ import './Features.css'
 const features = [
   {
     SVG: FlowRecordingSVG,
-    title: 'Manual flow recording',
-    description: 'Record user journeys by clicking through your app. No code, no selectors, no configuration.'
+    title: 'Flow recording',
+    description: 'Recorded flows you can rerun on demand to validate behavior.'
   },
   {
     SVG: ElementResolutionSVG,
-    title: 'Smart element resolution',
-    description: 'Axiom finds elements intelligently, even when IDs change or DOM structure shifts.'
+    title: 'Change-tolerant detection',
+    description: 'Designed to stay stable through common UI changes like renaming buttons or adjusting layout.'
   },
   {
     SVG: ChaosTestingSVG,
-    title: 'Chaos testing profiles',
-    description: 'Simulate slow networks, mobile viewports, and edge conditions automatically.'
+    title: 'Real-world conditions',
+    description: 'Run flows under controlled conditions like slow networks and different screen sizes.'
   },
   {
     SVG: TestReportsSVG,
-    title: 'Clear test reports',
-    description: 'Every run produces a detailed report with screenshots, timings, and failure context.'
+    title: 'Clear evidence on failure',
+    description: 'Screenshots, recordings, and context when something fails.'
   },
   {
     SVG: FixSuggestionsSVG,
-    title: 'Actionable fix suggestions',
-    description: 'When tests fail, get specific, copyable suggestions to resolve the issue.'
+    title: 'Actionable suggestions',
+    description: 'Clear suggestions based on where and how the flow failed.'
   },
   {
     SVG: ScheduledRunsSVG,
-    title: 'Scheduled test runs',
-    description: 'Run tests on a schedule or trigger them from CI. Always know your app is working.'
+    title: 'On-demand runs',
+    description: 'Scale runs across many browser sessions when needed.'
   }
 ]
 
@@ -77,12 +77,12 @@ export default function Features() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-header__label">Features</span>
+          <span className="section-header__label">What You Get</span>
           <h2 className="section-header__title">
-            Built for how you actually work
+            Everything you need. Nothing you don't.
           </h2>
           <p className="section-header__description">
-            Everything you need to test with confidence. Nothing you don't.
+            Practical tools for real testing. No enterprise overhead.
           </p>
         </motion.div>
 

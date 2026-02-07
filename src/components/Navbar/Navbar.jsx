@@ -35,7 +35,7 @@ export default function Navbar() {
         </div>
 
         <div className="navbar__actions">
-          <a href="#login" className="btn btn--ghost">Log in</a>
+
           <motion.a
             href="#hero"
             className="btn btn--primary"

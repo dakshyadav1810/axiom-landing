@@ -5,20 +5,20 @@ import './Problem.css'
 const riskFactors = [
   {
     threshold: 0.2,
-    label: "No safety net",
-    description: "You ship and pray. No tests, just hope.",
+    label: "No test coverage",
+    description: "You click around, looks fine. Ship it.",
     severity: "LOW"
   },
   {
     threshold: 0.5,
-    label: "Tech debt mounting",
-    description: "\"We'll add tests later\" ...that was 6 months ago.",
+    label: "Tests are always 'later'",
+    description: "\"We'll write tests after launch\" was 6 months ago.",
     severity: "MEDIUM"
   },
   {
     threshold: 0.8,
-    label: "Users are your QA",
-    description: "Bugs found via angry tweets, not test suites.",
+    label: "Bugs in production",
+    description: "You find out something's broken from a support ticket.",
     severity: "HIGH"
   }
 ]
@@ -73,10 +73,10 @@ export default function Problem() {
         >
           <span className="section-header__label">The Reality</span>
           <h2 className="section-header__title">
-            Most teams skip testing.
+            You ship fast. Testing doesn't keep up.
           </h2>
           <p className="section-header__description">
-            The cracks show up later.
+            And users find the bugs for you.
           </p>
         </motion.div>
 

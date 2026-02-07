@@ -1,4 +1,4 @@
-import { Check, Sparkles, ArrowRight } from 'lucide-react'
+import { Check, Tag, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './Pricing.css'
 
@@ -7,46 +7,43 @@ const plans = [
     name: 'Free',
     price: '$0',
     period: 'forever',
-    description: 'Try Axiom on a side project. No credit card required.',
+    description: 'Try the interface. See if it fits how you work.',
     features: [
-      '3 recorded tests',
-      '50 test runs / month',
-      'Basic reports',
+      '1 verification test',
+      '1 basic flow (10 steps max)',
+      '1 browser session',
       'Community support'
     ],
-    cta: 'Start Free',
+    cta: 'Join Waitlist',
     popular: false
   },
   {
-    name: 'Pro',
+    name: 'Standard',
     price: '$29',
-    period: 'per month',
-    description: 'For indie hackers and small teams shipping regularly.',
+    originalPrice: '$50',
+    period: '',
+    description: 'Real testing power. Find bugs before your users do.',
     features: [
-      'Unlimited tests',
-      'Unlimited runs',
-      'Chaos testing profiles',
-      'Scheduled runs',
-      'AI fix suggestions',
+      '3 full test runs',
+      'Unlimited steps per flow',
+      'Scale across many browser sessions',
       'Priority support'
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join Waitlist',
     popular: true
   },
   {
     name: 'Team',
-    price: '$99',
-    period: 'per month',
-    description: 'For growing teams that need collaboration.',
+    price: 'Custom',
+    period: '',
+    description: 'For teams that need security, control, and support.',
     features: [
-      'Everything in Pro',
-      '5 team members',
-      'Shared test library',
-      'CI/CD integration',
-      'Custom domains',
-      'SLA guarantee'
+      'Self-hosted runners',
+      'SSO & Audit logs',
+      'Custom integrations',
+      'Dedicated support channel'
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join Waitlist',
     popular: false
   }
 ]
@@ -56,7 +53,7 @@ export default function Pricing() {
     <section id="pricing" className="pricing">
       <div className="pricing__glow" />
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,14 +62,14 @@ export default function Pricing() {
         >
           <span className="section-header__label">Pricing</span>
           <h2 className="section-header__title">
-            Start free, scale when ready
+            Simple pricing. Early access.
           </h2>
           <p className="section-header__description">
-            No credit card required. Upgrade as your testing needs grow.
+            We're still early. Pricing reflects that.
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="pricing__grid"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,34 +77,37 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
         >
           {plans.map((plan, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               className={`pricing__card ${plan.popular ? 'pricing__card--popular' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              whileHover={{ 
+              whileHover={{
                 y: -8,
-                transition: { duration: 0.2 } 
+                transition: { duration: 0.2 }
               }}
             >
               {plan.popular && (
                 <div className="pricing__badge">
-                  <Sparkles size={12} />
-                  <span>Most Popular</span>
+                  <Tag size={12} />
+                  <span>Early bird pricing</span>
                 </div>
               )}
-              
+
               <div className="pricing__header">
                 <h3 className="pricing__name">{plan.name}</h3>
                 <div className="pricing__price-row">
+                  {plan.originalPrice && (
+                    <span className="pricing__original-price">{plan.originalPrice}</span>
+                  )}
                   <span className="pricing__price">{plan.price}</span>
-                  <span className="pricing__period">/{plan.period}</span>
+                  {plan.period && <span className="pricing__period">/{plan.period}</span>}
                 </div>
                 <p className="pricing__description">{plan.description}</p>
               </div>
-              
+
               <ul className="pricing__features">
                 {plan.features.map((feature, i) => (
                   <li key={i}>
@@ -116,8 +116,8 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              
-              <motion.button 
+
+              <motion.button
                 className={`pricing__cta ${plan.popular ? 'pricing__cta--primary' : ''}`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -130,15 +130,7 @@ export default function Pricing() {
         </motion.div>
 
         {/* Trust indicator */}
-        <motion.p 
-          className="pricing__trust"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-        >
-          14-day free trial on all paid plans • Cancel anytime
-        </motion.p>
+
       </div>
     </section>
   )

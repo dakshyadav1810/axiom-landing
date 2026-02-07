@@ -7,23 +7,23 @@ const steps = [
   {
     number: '01',
     icon: Link,
-    title: 'Connect your app',
-    description: 'Point Axiom at any deployed URL. No SDKs, no code changes, no infrastructure to manage.',
-    detail: 'Works with any web app: React, Vue, Next.js, or plain HTML. Just paste your URL.'
+    title: 'Point to your app',
+    description: 'Paste any deployed URL. Axiom works with any web app, no SDK needed.',
+    detail: 'React, Next.js, Vue, or plain HTML. If it runs in a browser, it works.'
   },
   {
     number: '02',
     icon: MousePointer,
-    title: 'Record the flow',
-    description: 'Walk through the user journey once. Axiom captures every interaction and builds a test.',
-    detail: 'Click through signup, checkout, or any critical path. Axiom watches and learns.'
+    title: 'Show it the flow',
+    description: 'Click through signup, checkout, or any critical path. Axiom watches and remembers.',
+    detail: 'No selectors to write. No assertions to configure. Just use your app.'
   },
   {
     number: '03',
     icon: Play,
-    title: 'Run and review',
-    description: 'Execute tests on demand or on schedule. Get clear pass/fail results with fixes.',
-    detail: 'Run before every deploy, or set up automated checks. Know your app works.'
+    title: 'Get the result',
+    description: 'A clear signal on whether your critical flows are ready before you ship.',
+    detail: 'Screenshots, recordings, and context so you know what happened.'
   }
 ]
 
@@ -61,7 +61,7 @@ export default function HowItWorks() {
           <div className="section-header">
             <span className="section-header__label">How It Works</span>
             <h2 className="section-header__title">
-              Three steps to confidence
+              Three simple steps
             </h2>
           </div>
 

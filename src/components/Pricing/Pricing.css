@@ -115,6 +115,13 @@
   margin-bottom: 14px;
 }
 
+.pricing__original-price {
+  font-size: 1.25rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
 .pricing__price {
   font-size: 2.75rem;
   font-weight: 600;

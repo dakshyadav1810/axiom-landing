@@ -38,7 +38,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <span className="hero__badge-dot" />
-          Now in public beta
+          Early access open
         </motion.div>
 
         <motion.h1
@@ -47,7 +47,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          Ship with <span className="hero__title-accent">Confidence</span>
+          Know it works <span className="hero__title-accent">before you ship</span>
         </motion.h1>
 
         <motion.p
@@ -56,8 +56,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom tests real user flows in modern web apps under real-world conditions, without
-          the overhead of traditional QA.
+          Axiom runs your critical user flows and tells you what breaks. No test scripts. No QA team required.
         </motion.p>
 
         <motion.div

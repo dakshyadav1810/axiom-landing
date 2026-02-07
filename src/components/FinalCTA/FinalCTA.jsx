@@ -41,7 +41,7 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Start testing in 60 seconds.
+            See if it works for you.
           </motion.h2>
           <motion.p
             className="final-cta__description"
@@ -50,7 +50,7 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            No credit card. No install. Just paste your URL and go.
+            No credit card. No commitment. Just try it.
           </motion.p>
           <motion.div
             className="final-cta__actions"
@@ -59,7 +59,7 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <WaitlistForm buttonText="Try Axiom Free" />
+            <WaitlistForm buttonText="Join the Waitlist" />
           </motion.div>
           <motion.p
             className="final-cta__note"
@@ -68,7 +68,7 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            Free forever for small projects. Upgrade when you're ready.
+            Early access is opening soon.
           </motion.p>
         </motion.div>
       </div>

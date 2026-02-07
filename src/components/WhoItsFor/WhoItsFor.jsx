@@ -5,27 +5,27 @@ import './WhoItsFor.css'
 const audiences = [
   {
     icon: Rocket,
-    title: 'Solo Founders & Indie Hackers',
-    description: 'Ship with confidence even without a QA team. Catch bugs before your users do.',
+    title: 'Solo founders',
+    description: 'Shipping alone doesn\'t mean shipping blind.',
     highlight: 'Most popular',
     size: 'large'
   },
   {
     icon: Users,
-    title: 'Small Dev Teams',
-    description: 'Validate features fast without blocking your sprint.',
+    title: 'Small dev teams',
+    description: 'Validate before deploy without blocking the sprint.',
     size: 'small'
   },
   {
     icon: Briefcase,
-    title: 'Agencies & Freelancers',
-    description: 'Prove to clients everything works before handoff.',
+    title: 'Freelancers and agencies',
+    description: 'Show clients it works before you hand it off.',
     size: 'small'
   },
   {
     icon: TrendingUp,
-    title: 'Growing Startups',
-    description: 'Scale your testing as you scale your product, without hiring dedicated QA.',
+    title: 'Early startups',
+    description: 'You\'re moving fast. Axiom keeps up.',
     size: 'medium'
   }
 ]
@@ -42,13 +42,12 @@ export default function WhoItsFor() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-header__label">Who It's For</span>
+          <span className="section-header__label">Built For</span>
           <h2 className="section-header__title">
-            Built for teams that move fast
+            Small teams. Fast shipping. No QA.
           </h2>
           <p className="section-header__description">
-            Whether you're a solo founder or a growing product team,
-            Axiom fits into the way you already work.
+            You don't have dedicated QA. You still want to know things work.
           </p>
         </motion.div>
 
@@ -86,7 +85,7 @@ export default function WhoItsFor() {
 
               {audience.size === 'large' && (
                 <div className="who-its-for__cta">
-                  <span>Perfect for you →</span>
+                  <span>That's you →</span>
                 </div>
               )}
             </motion.div>
@@ -101,7 +100,7 @@ export default function WhoItsFor() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          Join 500+ teams shipping with confidence
+          500+ teams on the waitlist
         </motion.p>
       </div>
     </section>

@@ -17,9 +17,9 @@
   --border-medium: rgba(255, 255, 255, 0.1);
   --border-strong: rgba(255, 255, 255, 0.15);
 
-  --text-primary: #e8e6e1;
-  --text-secondary: #7a8490;
-  --text-tertiary: #4a5260;
+  --text-primary: #f0eeea;
+  --text-secondary: #a8b0bd;
+  --text-tertiary: #6b7585;
 
   /* Brand colors */
   --accent: #30ddbe;
