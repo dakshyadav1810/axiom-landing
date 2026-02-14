@@ -56,7 +56,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom runs critical flows and shows what breaks before users do.
+          Axiom runs critical flows and shows what breaks, before your users do.
         </motion.p>
 
         <motion.div
