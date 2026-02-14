@@ -1,4 +1,4 @@
-import { Check, Tag, ArrowRight } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './Pricing.css'
 
@@ -6,44 +6,45 @@ const plans = [
   {
     name: 'Free',
     price: '$0',
-    period: 'forever',
-    description: 'Try the interface. See if it fits how you work.',
+    period: '',
+    description: 'For small projects.',
     features: [
-      '1 verification test',
-      '1 basic flow (10 steps max)',
-      '1 browser session',
-      'Community support'
+      '3 runs per month',
+      'Up to 3 flows',
+      'Basic variation testing',
+      'Single parallel run'
     ],
-    cta: 'Join Waitlist',
+    cta: 'Start Free',
     popular: false
   },
   {
     name: 'Standard',
-    price: '$29',
-    originalPrice: '$50',
-    period: '',
-    description: 'Real testing power. Find bugs before your users do.',
+    price: '$50',
+    period: 'month',
+    description: 'For teams shipping regularly.',
     features: [
-      '3 full test runs',
-      'Unlimited steps per flow',
-      'Scale across many browser sessions',
-      'Priority support'
+      '10 runs per month',
+      'Unlimited flows',
+      'Parallel execution',
+      'Failure classification',
+      'Flake detection',
+      'Selector healing'
     ],
-    cta: 'Join Waitlist',
+    cta: 'Start Free',
     popular: true
   },
   {
     name: 'Team',
     price: 'Custom',
     period: '',
-    description: 'For teams that need security, control, and support.',
+    description: 'For agencies and scaling teams.',
     features: [
       'Self-hosted runners',
       'SSO & Audit logs',
-      'Custom integrations',
-      'Dedicated support channel'
+      'Dedicated support',
+      'Custom integrations'
     ],
-    cta: 'Join Waitlist',
+    cta: 'Contact Us',
     popular: false
   }
 ]
@@ -62,10 +63,10 @@ export default function Pricing() {
         >
           <span className="section-header__label">Pricing</span>
           <h2 className="section-header__title">
-            Simple pricing. Early access.
+            Start free. Upgrade when needed.
           </h2>
           <p className="section-header__description">
-            We're still early. Pricing reflects that.
+            No contracts. No setup fees.
           </p>
         </motion.div>
 
@@ -89,19 +90,9 @@ export default function Pricing() {
                 transition: { duration: 0.2 }
               }}
             >
-              {plan.popular && (
-                <div className="pricing__badge">
-                  <Tag size={12} />
-                  <span>Early bird pricing</span>
-                </div>
-              )}
-
               <div className="pricing__header">
                 <h3 className="pricing__name">{plan.name}</h3>
                 <div className="pricing__price-row">
-                  {plan.originalPrice && (
-                    <span className="pricing__original-price">{plan.originalPrice}</span>
-                  )}
                   <span className="pricing__price">{plan.price}</span>
                   {plan.period && <span className="pricing__period">/{plan.period}</span>}
                 </div>

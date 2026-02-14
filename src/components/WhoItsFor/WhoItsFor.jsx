@@ -1,32 +1,25 @@
-import { Rocket, Users, Briefcase, Zap, Shield, TrendingUp } from 'lucide-react'
+import { Rocket, Users, Briefcase } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './WhoItsFor.css'
 
 const audiences = [
   {
     icon: Rocket,
-    title: 'Solo founders',
-    description: 'Shipping alone doesn\'t mean shipping blind.',
-    highlight: 'Most popular',
+    title: 'Agencies',
+    description: 'Protect launches. Validate before handoff.',
     size: 'large'
   },
   {
     icon: Users,
-    title: 'Small dev teams',
-    description: 'Validate before deploy without blocking the sprint.',
+    title: 'Small SaaS Teams',
+    description: 'Catch regressions before users do.',
     size: 'small'
   },
   {
     icon: Briefcase,
-    title: 'Freelancers and agencies',
-    description: 'Show clients it works before you hand it off.',
+    title: 'Early-Stage Startups',
+    description: 'Move fast without silent breakage.',
     size: 'small'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Early startups',
-    description: 'You\'re moving fast. Axiom keeps up.',
-    size: 'medium'
   }
 ]
 
@@ -44,16 +37,16 @@ export default function WhoItsFor() {
         >
           <span className="section-header__label">Built For</span>
           <h2 className="section-header__title">
-            Small teams. Fast shipping. No QA.
+            Built for teams that move fast
           </h2>
           <p className="section-header__description">
-            You don't have dedicated QA. You still want to know things work.
+            No QA department. Still quality focused.
           </p>
         </motion.div>
 
         {/* Bento Grid Layout */}
         <motion.div
-          className="who-its-for__bento"
+          className={`who-its-for__bento ${audiences.length === 3 ? 'who-its-for__bento--three' : ''}`}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -72,10 +65,6 @@ export default function WhoItsFor() {
                 transition: { duration: 0.2 }
               }}
             >
-              {audience.highlight && (
-                <span className="who-its-for__highlight">{audience.highlight}</span>
-              )}
-
               <div className="who-its-for__cell-icon">
                 <audience.icon size={audience.size === 'large' ? 32 : 24} />
               </div>
@@ -85,23 +74,13 @@ export default function WhoItsFor() {
 
               {audience.size === 'large' && (
                 <div className="who-its-for__cta">
-                  <span>That's you →</span>
+                  <span>Built for your team →</span>
                 </div>
               )}
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Social proof hint */}
-        <motion.p
-          className="who-its-for__proof"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          500+ teams on the waitlist
-        </motion.p>
       </div>
     </section>
   )

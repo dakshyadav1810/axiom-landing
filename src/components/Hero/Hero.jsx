@@ -47,7 +47,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          Know it works <span className="hero__title-accent">before you ship</span>
+          Ship without <span className="hero__title-accent">second-guessing.</span>
         </motion.h1>
 
         <motion.p
@@ -56,7 +56,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Axiom runs your critical user flows and tells you what breaks. No test scripts. No QA team required.
+          Axiom runs critical flows and shows what breaks before users do.
         </motion.p>
 
         <motion.div
@@ -65,7 +65,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <WaitlistForm />
+          <WaitlistForm
+            buttonText="Start Free"
+            noteText="No credit card. Takes 60 seconds."
+          />
         </motion.div>
 
         <div className="hero__preview">

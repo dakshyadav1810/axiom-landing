@@ -5,20 +5,20 @@ import './Problem.css'
 const riskFactors = [
   {
     threshold: 0.2,
-    label: "No test coverage",
-    description: "You click around, looks fine. Ship it.",
+    label: "No safety net",
+    description: "You click through a few screens. It looks fine. You deploy.",
     severity: "LOW"
   },
   {
     threshold: 0.5,
-    label: "Tests are always 'later'",
-    description: "\"We'll write tests after launch\" was 6 months ago.",
+    label: "Tests are \"later\"",
+    description: "You meant to add coverage. The roadmap moved on.",
     severity: "MEDIUM"
   },
   {
     threshold: 0.8,
-    label: "Bugs in production",
-    description: "You find out something's broken from a support ticket.",
+    label: "Bugs show up publicly",
+    description: "A signup breaks. Checkout fails. You find out from a support ticket.",
     severity: "HIGH"
   }
 ]
@@ -73,10 +73,10 @@ export default function Problem() {
         >
           <span className="section-header__label">The Reality</span>
           <h2 className="section-header__title">
-            You ship fast. Testing doesn't keep up.
+            You ship fast. Testing gets skipped.
           </h2>
           <p className="section-header__description">
-            And users find the bugs for you.
+            And users become your QA.
           </p>
         </motion.div>
 
@@ -171,6 +171,16 @@ export default function Problem() {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          className="problem__summary"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Fast shipping should not mean shipping blind.
+        </motion.p>
       </div>
     </section>
   )

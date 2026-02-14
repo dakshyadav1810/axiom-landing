@@ -48,8 +48,8 @@ export default function TestReport() {
               Clarity when it matters most
             </h2>
             <p className="test-report__description">
-              Every test run produces a complete, readable report. No guesswork. 
-              See exactly what happened, where it failed, and how to fix it.
+              Every run gives a clean report.
+              No noise. No guesswork.
             </p>
             <ul className="test-report__benefits">
               <motion.li
@@ -59,7 +59,7 @@ export default function TestReport() {
                 transition={{ delay: 0.4 }}
               >
                 <CheckCircle2 size={18} />
-                Step-by-step execution trace
+                Step-by-step trace
               </motion.li>
               <motion.li
                 initial={{ opacity: 0, y: 10 }}
@@ -77,9 +77,21 @@ export default function TestReport() {
                 transition={{ delay: 0.6 }}
               >
                 <CheckCircle2 size={18} />
-                AI-powered fix suggestions
+                Clear failure explanation
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+              >
+                <CheckCircle2 size={18} />
+                What to investigate
               </motion.li>
             </ul>
+            <p className="test-report__description">
+              You know what failed and what to fix.
+            </p>
           </motion.div>
 
           <motion.div 

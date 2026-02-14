@@ -12,33 +12,33 @@ import './Features.css'
 const features = [
   {
     SVG: FlowRecordingSVG,
-    title: 'Flow recording',
-    description: 'Recorded flows you can rerun on demand to validate behavior.'
+    title: 'Flow Recording',
+    description: 'Turn real user journeys into reusable test flows.'
   },
   {
     SVG: ElementResolutionSVG,
-    title: 'Change-tolerant detection',
-    description: 'Designed to stay stable through common UI changes like renaming buttons or adjusting layout.'
+    title: 'Resilient Detection',
+    description: 'Handles common UI changes like renamed buttons or layout shifts.'
   },
   {
     SVG: ChaosTestingSVG,
-    title: 'Real-world conditions',
-    description: 'Run flows under controlled conditions like slow networks and different screen sizes.'
+    title: 'Real-World Conditions',
+    description: 'Run flows on slow networks, different screens, and stress scenarios.'
   },
   {
     SVG: TestReportsSVG,
-    title: 'Clear evidence on failure',
-    description: 'Screenshots, recordings, and context when something fails.'
+    title: 'Clear Evidence on Failure',
+    description: 'See exactly what happened at every step.'
   },
   {
     SVG: FixSuggestionsSVG,
-    title: 'Actionable suggestions',
-    description: 'Clear suggestions based on where and how the flow failed.'
+    title: 'Actionable Insights',
+    description: 'See why it failed, not just that it failed.'
   },
   {
     SVG: ScheduledRunsSVG,
-    title: 'On-demand runs',
-    description: 'Scale runs across many browser sessions when needed.'
+    title: 'On-Demand and Scheduled Runs',
+    description: 'Run before deploy or whenever you need certainty.'
   }
 ]
 
@@ -79,10 +79,10 @@ export default function Features() {
         >
           <span className="section-header__label">What You Get</span>
           <h2 className="section-header__title">
-            Everything you need. Nothing you don't.
+            Everything you need to test with confidence.
           </h2>
           <p className="section-header__description">
-            Practical tools for real testing. No enterprise overhead.
+            Without enterprise complexity.
           </p>
         </motion.div>
 

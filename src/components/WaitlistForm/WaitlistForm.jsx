@@ -7,7 +7,10 @@ import './WaitlistForm.css'
 export default function WaitlistForm({
     placeholder = "Enter your email",
     buttonText = "Get Early Access",
-    className = ""
+    className = "",
+    noteText = "Join 2,000+ teams waiting for access. No spam, ever.",
+    subNoteText = "",
+    showNote = true
 }) {
     const [email, setEmail] = useState('')
     const [status, setStatus] = useState('idle') // idle, loading, success, error
@@ -131,9 +134,12 @@ export default function WaitlistForm({
                 </motion.div>
             )}
 
-            <p className="waitlist-note">
-                Join 2,000+ teams waiting for access. No spam, ever.
-            </p>
+            {showNote && (
+                <div className="waitlist-note-wrap">
+                    <p className="waitlist-note">{noteText}</p>
+                    {subNoteText && <p className="waitlist-subnote">{subNoteText}</p>}
+                </div>
+            )}
         </div>
     )
 }

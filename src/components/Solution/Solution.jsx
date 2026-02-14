@@ -3,15 +3,15 @@ import { motion } from 'framer-motion'
 import './Solution.css'
 
 const beforeItems = [
-  { text: 'Clicking through every flow manually' },
-  { text: 'Test scripts that break when UI changes' },
-  { text: 'Finding out from users' }
+  { text: 'Manual clicking before every deploy' },
+  { text: 'Test suites that break when the UI shifts' },
+  { text: 'Issues discovered after release' }
 ]
 
 const afterItems = [
-  { text: 'Recorded flows you can rerun on demand' },
-  { text: 'Flows that remain reliable as your UI evolves' },
-  { text: 'A clear signal on whether flows are ready' }
+  { text: 'Record flows once' },
+  { text: 'Run them anytime' },
+  { text: 'Get a clear signal before shipping' }
 ]
 
 export default function Solution() {
@@ -27,10 +27,11 @@ export default function Solution() {
         >
           <span className="section-header__label">A Different Approach</span>
           <h2 className="section-header__title">
-            Test like a user. Ship with proof.
+            Test like a real user. Ship with proof.
           </h2>
           <p className="section-header__description">
-            Axiom validates your app the way users experience it. Less brittle than traditional scripted tests.
+            Axiom validates your app with real flows in a real browser.
+            Less brittle than scripted tests. Less overhead than QA.
           </p>
         </motion.div>
 

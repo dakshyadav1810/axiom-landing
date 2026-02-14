@@ -22,7 +22,7 @@ export default function Footer() {
           >
             <img src="/logo.avif" alt="Axiom" className="footer__logo" />
             <p className="footer__tagline">
-              The testing platform for teams that ship fast.
+              Testing for teams that ship fast.
             </p>
           </motion.div>
 

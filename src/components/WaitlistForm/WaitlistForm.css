@@ -113,11 +113,24 @@
 }
 
 /* Note text */
-.waitlist-note {
+.waitlist-note-wrap {
     margin-top: 16px;
+}
+
+.waitlist-note {
+    margin-top: 0;
     font-size: 0.875rem;
     color: var(--text-tertiary);
     text-align: center;
+    margin-bottom: 0;
+}
+
+.waitlist-subnote {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 0;
 }
 
 /* Spinner */

@@ -34,6 +34,15 @@ export default function FinalCTA() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
+          <motion.span
+            className="section-header__label"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
+            Final Step
+          </motion.span>
           <motion.h2
             className="final-cta__title"
             initial={{ opacity: 0, y: 20 }}
@@ -50,7 +59,8 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            No credit card. No commitment. Just try it.
+            Start testing in under a minute.
+            No credit card. No install.
           </motion.p>
           <motion.div
             className="final-cta__actions"
@@ -59,17 +69,8 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <WaitlistForm buttonText="Join the Waitlist" />
+            <WaitlistForm buttonText="Start Free" showNote={false} />
           </motion.div>
-          <motion.p
-            className="final-cta__note"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
-            Early access is opening soon.
-          </motion.p>
         </motion.div>
       </div>
     </section>

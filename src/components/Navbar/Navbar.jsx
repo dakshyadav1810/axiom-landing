@@ -47,7 +47,7 @@ export default function Navbar() {
               window.dispatchEvent(new CustomEvent('focus-waitlist'))
             }}
           >
-            Join Waitlist
+            Start Free
           </motion.a>
         </div>
 
